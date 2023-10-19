@@ -1,0 +1,29 @@
+.roundicon {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--primary2);
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.roundicon:hover {
+    border: 2px solid var(--primary2);
+    background-color: var(--primary4);
+}
+
+.roundicon:active {
+    background-color: #4A4E69;
+}
+
+.roundicon-img {
+    aspect-ratio: 1 / 1;
+    height: 70%;
+    width: 70%;
+}

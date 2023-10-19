@@ -1,0 +1,69 @@
+{
+    "haveAccount": "Tener una cuenta ?",
+    "authenticateHere": "Autentifíquese aquí",
+    "Account": "Cuenta",
+    "Username": "Nombre de usuario",
+    "Password": "contraseña",
+    "Email": "Correo electrónico",
+    "ConfirmPassword": "Confirmar contraseña",
+    "Continue": "Continúe",
+    "signin": {
+        "title": "Acceda a su cuenta",
+        "titleDesc": "Autentícate y accede a más de 2000 películas y series.",
+        "forgetPassword": "¿Has olvidado su contraseña?",
+        "noAccount": "¿No tienes cuenta?",
+        "registerHere": "Regístrese aquí",
+        "Signin": "Regístrese en"
+    },
+    "signup": {
+        "title": "Cree su cuenta",
+        "titleDesc": "Hola, ¿eres nuevo? ¡Registra tus datos para crear una cuenta y acceder a los perfiles !"
+    },
+    "forgotPassword": {
+        "title": "Restablecer ",
+        "titleDesc": "¿Ha olvidado su contraseña? No te preocupes, te enviaremos instrucciones para restablecerla.",
+        "Send": "Enviar",
+        "mailRequired": "correo requerido",
+        "mailInvalid": "correo no válido",
+        "mailSend": "Correo enviado con éxito"
+    },
+    "resetPassword": {
+        "title": "Restablecer ",
+        "titleDesc": "Establezca una nueva contraseña para su cuenta. Le recomendamos que elija una contraseña segura de al menos 8 caracteres, con letras, números y caracteres especiales.",
+        "NewPassword": "Nueva contraseña",
+        "ConfirmNewPassword": "Confirmar nueva contraseña",
+        "SessionExpired": "Sesión expirada, por favor solicite un nuevo correo",
+        "PasswordRequired": "Contraseña obligatoria",
+        "ConfirmPasswordRequired": "Confirmar contraseña",
+        "passDifferents": "Contraseña y Confirmar contraseña diferentes"
+    },
+    "header": {
+        "profile": "Perfil",
+        "search": "Buscar",
+        "logout": "Salir"
+    },
+    "profile": {
+        "Username": "Nombre de usuario",
+        "FirstName": "Nombre",
+        "LastName": "Apellido"
+    },
+    "search": {
+        "filter": "Filtro",
+        "sort": "Ordenar",
+        "submit": "Buscar",
+        "resultsFound": "resultados encontrados"
+    },
+    "movieDetails": {
+        "summarize": "Currículum",
+        "informations": "Información",
+        "infoBudget": "Presupuesto",
+        "infoRevenue": "Ingresos",
+        "infoRuntime": "Tiempo de lectura",
+        "infoProduction-countries": "Países productores",
+        "cast": "Fundición",
+        "crew": "Tripulación",
+        "comments": "Comentarios",
+        "addComment": "Añadir un comentario",
+        "post": "Publicar"
+    }
+}

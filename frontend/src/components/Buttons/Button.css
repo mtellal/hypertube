@@ -1,0 +1,39 @@
+.button {
+    padding: 10px 15px;
+    background-color: var(--primary3);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+}
+
+.button:hover {
+    background-color: var(--primary4);
+}
+
+.button:active {
+    background-color: #4A4E69;
+}
+
+.button-title
+{
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--primary-color1);
+}
+
+
+@media screen and (max-width: 400px) {
+    .button {
+        height: 40px;
+        width: 60%;
+    }
+
+    .button-title {
+        font-size: 14px;
+    }
+}

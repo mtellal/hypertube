@@ -1,0 +1,68 @@
+.profilepage-c {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.profilecurrentuser {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+}
+
+.profilecurrentuser-carousel {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.profilecurrentuser-infos {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10vh;
+    padding-left: 10vh;
+}
+
+
+.profilecurrentuser-biolabel {
+    width: 30vw;
+}
+
+@media screen and (max-width: 1400px) {
+
+    .profilecurrentuser {
+        flex-direction: column;
+        gap: 2vh;
+        overflow: visible;
+    }
+
+    .profilecurrentuser-carousel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2vh;
+        overflow-y: visible;
+    }
+    
+
+    .profilecurrentuser-infos {
+        padding: 50px;
+        min-width: 60%;
+        align-self: center;
+    }
+
+    .profilecurrentuser-biolabel {
+        min-width: 300px;
+        width: auto;
+        max-width: 700px;
+    }
+    
+}

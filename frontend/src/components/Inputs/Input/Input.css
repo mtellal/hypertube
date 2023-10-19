@@ -1,0 +1,34 @@
+.input {
+    width: 96%;
+    height: 60px;
+    border-radius: 5px;
+    border: 1px solid white;
+    background-color: var(--primary2);
+    padding: 0 2%;
+
+    caret-color: var(--primary-color1);
+    color: var(--primary-color1);
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    outline: none;
+}
+
+.input::placeholder {
+    color: var(--primary-color1);
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+
+@media screen and (max-width: 400px) {
+
+    .input {
+        height: 50px;
+    }
+    
+    .input::placeholder, .input {
+        font-size: 12px;
+    }
+}

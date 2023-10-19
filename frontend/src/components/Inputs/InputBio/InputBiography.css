@@ -1,0 +1,25 @@
+#inputbio {
+    width: 96%;
+    height: 120px;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color1);
+    background-color: var(--primary2);
+    padding: 2%;
+
+    caret-color: var(--primary-color1);
+    color: var(--primary-color1);
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    outline: none;
+    resize: none;
+}
+
+textarea::placeholder,
+#inputbio-input::placeholder {
+    color: var(--primary-color1);
+    opacity: 70%;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}

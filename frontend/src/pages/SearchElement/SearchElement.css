@@ -1,0 +1,201 @@
+.searchelm {
+    height: 87vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    padding: 3vh 0;
+}
+
+.searchelm-c1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary2);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.searchelm-title {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--primary-color1);
+}
+
+.searchelm-year {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--primary-color1);
+    opacity: 70%;
+}
+
+.searchelm-rating {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchelm-rating>p {
+    margin: 0;
+}
+
+.searchelm-rating-rate {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--primary-color1);
+}
+
+.searchelm-img {
+    border-radius: 5px;
+    height: 450px;
+}
+
+.searchelm-desc {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 1000px;
+}
+
+.searchelm-desc>p {
+    margin: 0;
+    text-align: start;
+    font-size: 14px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.searchelm-infos {
+    width: 1000px;
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.searchelm-infos>p {
+    margin: 0;
+    padding: 2px 0;
+}
+
+.searchelm-desc>h1,
+.searchelm-cast>h1,
+.searchelm-infos>h1 {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--primary-color1);
+}
+
+.searchelm-cast {
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.searchelm-cast2 {
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: auto;
+    width: 100%;
+
+}
+
+
+.searchelm-cast-list {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.person-card {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    align-items: center;
+    background-color: var(--primary2);
+    border-radius: 5px;
+    justify-content: space-around;
+}
+
+.person-img {
+    height: 120px;
+    width: 80px;
+    border-radius: 5px;
+}
+
+.video-c {
+    margin-top: 5vh;
+    width: 800px;
+}
+
+#video {
+    height: 100%;
+    width: 800px;
+    max-height: 300px;
+}
+
+.torrent-c {
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.torrent-element {
+    height: 50px;
+    display: flex;
+    background-color: var(--primary2);
+    width: 800px;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.torrent-element>p {
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.torrent-element:hover {
+    background-color: var(--primary3);
+    cursor: pointer;
+}
+
+.torrent-playbutton {
+    height: 80%;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 700px) {
+
+    .video-c {
+        margin-top: 5vh;
+        width: 100%;
+    }
+
+    #video {
+        width: 80%;
+    }
+
+    .torrent-c {
+        align-items: center;
+    }
+
+    .torrent-element {
+        width: 90%;
+    }
+}

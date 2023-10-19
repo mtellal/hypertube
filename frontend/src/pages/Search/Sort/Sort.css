@@ -1,0 +1,14 @@
+.menusort {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 250px;
+    background-color: var(--primary1);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.menusort-title {
+    margin: 0;
+    color: var(--primary-color1);
+}

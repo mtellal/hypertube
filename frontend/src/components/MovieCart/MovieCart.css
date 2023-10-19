@@ -1,0 +1,79 @@
+.moviecart {
+    background-color: var(--primary2);
+    min-height: 300px;
+    width: 220px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 5px;
+    gap: 5px;
+    padding: 10px;
+}
+
+.moviecart:hover {
+    background-color: var(--primary3);
+    cursor: pointer;
+}
+
+.moviecart-img {
+    align-self: center;
+    height: 220px;
+    width: 150px;
+    border-radius: 5px;
+}
+
+.moviecart-infos {
+    display: flex;
+    flex-direction: column;
+}
+
+.moviecart-infos>p {
+    margin: 0;
+}
+
+.moviecart-title-c {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    text-align: start;
+}
+
+.moviecart-title-c>p {
+    margin: 0;
+}
+
+.moviecart-title {
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.moviecart-overview {
+    text-align: start;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    opacity: 80%;
+}
+
+.moviecart-stats {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.moviecart-stats > p {
+    margin: 0;
+}
+
+.moviecart-genres {
+    margin: 0;
+    background-color: var(--primary3);
+    border-radius: 5px;
+    padding: 2px 5px;
+}

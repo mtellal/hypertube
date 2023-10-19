@@ -1,0 +1,69 @@
+{
+    "haveAccount": "拥有账户",
+    "authenticateHere": "在此验证",
+    "Account": "账户",
+    "Username": "用户名",
+    "Password": "暗号",
+    "Email": "电子邮件",
+    "ConfirmPassword": "确认密码",
+    "Continue": "继续",
+    "signin": {
+        "title": "登录您的账户",
+        "titleDesc": "进行身份验证，即可访问 2000 多部电影和系列剧。",
+        "forgetPassword": "忘记密码？",
+        "noAccount": "你没有电话吗？",
+        "registerHere": "在此注册",
+        "Signin": "登录"
+    },
+    "signup": {
+        "title": "创建账户",
+        "titleDesc": "嘿，你是新来的吗？请注册您的信息，创建账户并访问个人资料！"
+    },
+    "forgotPassword": {
+        "title": "重置密码",
+        "titleDesc": "忘记密码了？不用担心，我们会向您发送重置说明。",
+        "Send": "发送",
+        "mailRequired": "需要邮寄",
+        "mailInvalid": "邮件无效",
+        "mailSend": "邮件发送成功"
+    },
+    "resetPassword": {
+        "title": "重置密码",
+        "titleDesc": "为您的账户设置新密码。我们建议您选择一个强大的密码，至少包含 8 个字符的字母、数字和特殊字符。",
+        "NewPassword": "新密码",
+        "ConfirmNewPassword": "确认新密码",
+        "SessionExpired": "会话已过期，请申请新邮件",
+        "PasswordRequired": "需要密码",
+        "ConfirmPasswordRequired": "需要确认密码",
+        "passDifferents": "密码和确认密码不同"
+    },
+    "header": {
+        "profile": "简介",
+        "search": "搜索",
+        "logout": "注销"
+    },
+    "profile": {
+        "Username": "用户名",
+        "FirstName": "姓名",
+        "LastName": "姓氏"
+    },
+    "search": {
+        "filter": "过滤器",
+        "sort": "分类",
+        "submit": "提交",
+        "resultsFound": "结果发现"
+    },
+    "movieDetails": {
+        "summarize": "简历",
+        "informations": "信息",
+        "infoBudget": "预算",
+        "infoRevenue": "收入",
+        "infoRuntime": "运行时间",
+        "infoProduction-countries": "生产国",
+        "cast": "铸造",
+        "crew": "船员",
+        "comments": "评论",
+        "addComment": "添加评论",
+        "post": "职位"
+    }
+}

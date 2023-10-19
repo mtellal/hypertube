@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+:root {
+  --primary1: white;
+  --primary2: #e2d1c7;
+  --primary3: #C9ADA7;
+  --primary4: #b3938c;
+
+  --primary-color1: black;
+  --primary-color2: #c79174;
+
+  --pink: #FFB2D7;
+
+  --green: #39b600;
+  --red: #ff0000;
+}
+
+.font-14 {
+  margin: 0;
+  color: var(--primary-color1);
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+
+.font-16 {
+  margin: 0;
+  color: var(--primary-color1);
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+
+.font-18 {
+  margin: 0;
+  color: var(--primary-color1);
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.font-22 {
+  margin: 0;
+  color: var(--primary-color1);
+  font-size: 22px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.font-24 {
+  margin: 0;
+  color: var(--primary-color1);
+  font-size: 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+
+.font-14-second {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+
+.font-12 {
+  margin: 0;
+  color: var(--primary-color1);
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.font-12-second {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.title-input {
+  color: var(--primary-color1);
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  align-self: flex-start;
+  margin: 0 0 3px 0;
+}
+
+
+.underline-14 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: var(--primary-color1);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.underline-14:hover {
+  font-weight: 600;
+}
+
+.opacity60 {
+  opacity: 60%;
+}

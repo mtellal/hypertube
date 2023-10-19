@@ -1,0 +1,21 @@
+.buttonwrapper {
+    width: 92%;
+    max-width: 170px;
+    height: 50px;
+    padding: 0px 4%;
+    background-color: var(--primary3);
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttonwrapper:hover {
+    background-color: var(--primary4);
+}
+
+.buttonwrapper:active {
+    background-color: var(--primary3);
+}

@@ -1,0 +1,69 @@
+{
+    "haveAccount": "Vous avez un compte ? ",
+    "authenticateHere": "Identifiez vous ici",
+    "Account": "Compte",
+    "Username": "Pseudo",
+    "Password": "Mot de passe",
+    "Email": "Email",
+    "ConfirmPassword": "Confirmez le mot de passe",
+    "Continue": "Continuer",
+    "signin": {
+        "title": "Connectez vous a votre ",
+        "titleDesc": "Connectez vous et accede a plus de 2000+ films et series",
+        "forgetPassword": "Mot de passe oublie ?",
+        "noAccount": "Vous n'avez pas de compte ?",
+        "registerHere": "Creer ici",
+        "Signin": "Se connecter"
+    },
+    "signup": {
+        "title": "Creez votre ",
+        "titleDesc": "Hey, etes vous nouveau ? Enregistrez vos informations afin de creer votre compte et acceder aux contenus."
+    },
+    "forgotPassword": {
+        "title": "Modifier votre ",
+        "titleDesc": "Mot de passe oublie ? Aucun probleme, nous vous envoyons vos instructions.",
+        "Send": "Envoyer",
+        "mailRequired": "mail requis",
+        "mailInvalid": "mail invalide",
+        "mailSend": "Mail envoye"
+    },
+    "resetPassword": {
+        "title": "Modifier votre ",
+        "titleDesc": "Mettez a jour votre mot de passe. Nous vous recommandons de choisir un mot de passe avec au moins 8 caracteres, avec des lettres, des nombres et des caracteres speciaux.",
+        "NewPassword": "Nouveau mot de passe",
+        "ConfirmNewPassword": "Confirmez le nouveau mot de passe",
+        "SessionExpired": "Session expiree, demandez a nouveau un mail",
+        "PasswordRequired": "Mot de passe requis",
+        "ConfirmPasswordRequired": "Confirmation requis",
+        "passDifferents": "Les mots de passes different"
+    },
+    "header": {
+        "profile": "Profil",
+        "search": "Rechercher",
+        "logout": "Quitter"
+    },
+    "profile": {
+        "Username": "Pseudo",
+        "FirstName": "Prenom",
+        "LastName": "Nom"
+    },
+    "search": {
+        "filter": "Filtrer",
+        "sort": "Trier",
+        "submit": "Rechercher",
+        "resultsFound": "resultats trouves"
+    },
+    "movieDetails": {
+        "summarize": "Resume",
+        "informations": "Informations",
+        "infoBudget": "Budget",
+        "infoRevenue": "Revenue",
+        "infoRuntime": "Temps de visionnage",
+        "infoProduction-countries": "Pays de production",
+        "cast": "Casting",
+        "crew": "Equipe",
+        "comments": "Commentaires",
+        "addComment": "Ajoutez un commentaire",
+        "post": "Publier"
+    }
+}

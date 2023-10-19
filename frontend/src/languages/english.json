@@ -1,0 +1,69 @@
+{
+    "haveAccount": "Have an account ?",
+    "authenticateHere": "Authenticate here",
+    "Account": "Account",
+    "Username": "Username",
+    "Password": "Password",
+    "Email": "Email",
+    "Continue": "Continue",
+    "ConfirmPassword": "Confirm password",
+    "signin": {
+        "title": "Log into your ",
+        "titleDesc": "Authenticate yourself and get access to 2000+ films and series.",
+        "forgetPassword": "Forgot password ?",
+        "noAccount": "Don't have an acocunt ?",
+        "registerHere": "Register here",
+        "Signin": "Signin"
+    },
+    "signup": {
+        "title": "Create your ",
+        "titleDesc": "Hey, are you new ? Register your information to create an account and access profiles !"
+    },
+    "forgotPassword": {
+        "title": "Reset your ",
+        "titleDesc": "Forgot your password ? No worries, we'll send you reset instructions.",
+        "Send": "Send",
+        "mailRequired": "mail required",
+        "mailInvalid": "mail invalid",
+        "mailSend": "Mail sucessfuly send"
+    },
+    "resetPassword": {
+        "title": "Reset your ",
+        "titleDesc": "Set a new password to your account. We recommand you to choose a strong password with at least 8 characters with letters, numbers and special charachters.",
+        "NewPassword": "New password",
+        "ConfirmNewPassword": "Confirm new password",
+        "SessionExpired": "Session expired, please ask a new mail",
+        "PasswordRequired": "Password required",
+        "ConfirmPasswordRequired": "Confirm password required",
+        "passDifferents": "Password and Confirm password different"
+    },
+    "header": {
+        "profile": "Profile",
+        "search": "Search",
+        "logout": "Logout"
+    },
+    "profile": {
+        "Username": "Username",
+        "FirstName": "First Name",
+        "LastName": "Last Name"
+    },
+    "search": {
+        "filter": "Filter",
+        "sort": "Sort",
+        "submit": "Submit",
+        "resultsFound": "results found"
+    },
+    "movieDetails": {
+        "summarize": "Resume",
+        "informations": "Informations",
+        "infoBudget": "Budget",
+        "infoRevenue": "Revenue",
+        "infoRuntime": "Runtime",
+        "infoProduction-countries": "Production countries",
+        "cast": "Casting",
+        "crew": "Crew",
+        "comments": "Comments",
+        "addComment": "Add a comment",
+        "post": "Post"
+    }
+}
