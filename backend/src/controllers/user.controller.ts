@@ -203,7 +203,7 @@ export async function updateUser(req: Request, res: Response) {
             values.push(req.body.username)
         }
         if (req.body.firstName) {
-            keys.push("firatName");
+            keys.push("firstName");
             values.push(req.body.firstName)
         }
         if (req.body.lastName) {
@@ -222,7 +222,7 @@ export async function updateUser(req: Request, res: Response) {
         return (res.status(200).json({ message: "User updated" }))
     }
     catch (e) {
-        // console.log(e);
+        console.log(e);
         return (res.status(400).json({ message: "User update failed" }))
     }
 }
