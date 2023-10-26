@@ -14,13 +14,11 @@ export function useCurrentUser() {
     return (useContext(UserContext))
 }
 
-export function UserProvider({ children, _user, token, userId }: any) {
+export function UserProvider({ children, _user}: any) {
 
     const [currentUser, setCurrentUser] = useState({
         blockIds: []
     });
-
-
 
     useEffect(() => {
         if (_user) {
@@ -35,7 +33,6 @@ export function UserProvider({ children, _user, token, userId }: any) {
     function removeBlockUserId(blockUserId: string) {
         setCurrentUser((u: any) => ({ ...u, blockIds: u.blockIds.filter((id: string) => id !== blockUserId) }))
     }
-
 
     return (
         <UserContext.Provider value={{

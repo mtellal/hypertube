@@ -23,10 +23,6 @@ services:
       - .env
     ports:
       - ${BACK_PORT}:${BACK_PORT}
-      - 9229:9229
-      - "5002:5002"
-      - "6881-6889:6881-6889"
-      - "6881-6889:6881-6889/udp"
     depends_on:
       mariadb:
         condition: service_healthy

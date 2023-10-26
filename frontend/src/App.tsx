@@ -37,14 +37,12 @@ export async function authenticateLoader({ request }: any) {
    return ({ user })
 }
 
-
 export function NotAuthenticateSpace() {
    return (
       <div className="App">
          <LanguageProvier>
             <Header />
             <div style={{ height: '93vh', width: '100%', position: 'relative', overflow: 'hidden' }}>
-
                <div className='app-c'>
                   <div className='app-phoneimg-c'>
                      <img src={movieFilms} className='app-phoneimg' />
@@ -56,7 +54,6 @@ export function NotAuthenticateSpace() {
                      </div>
                   </div>
                </div>
-
             </div>
          </LanguageProvier>
          <div className='footer'> Hypertube </div>
