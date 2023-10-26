@@ -22,7 +22,7 @@ In the `backend/.env` file set:
 
 ## Frontend
 
-### The stack 
+### Stack 
 - React
 - Typescript
 - Axios
@@ -43,7 +43,7 @@ In the `backend/.env` file set:
 
 ## Backend
 
-### The stack
+### Stack
 - NodeJs
 - Express
 - Mariadb
