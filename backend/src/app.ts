@@ -31,10 +31,10 @@ app.get("/user/photo/:id", UserMiddleware.JWTAuthentification, UserController.ge
 
 app.post("/user/signup", UserController.signup)
 app.post("/user/signin", UserController.signin)
-app.post("/user/update", UserMiddleware.JWTAuthentification, UserController.updateUser)
-app.post("/user/resetPassword", UserController.resetPassword)
-app.post("/user/updatePassword", UserMiddleware.JWTAuthentification, UserController.updatePassword)
-app.post("/user/photos", UserMiddleware.JWTAuthentification, UserController.uploadProfilePicture)
+app.patch("/user/update", UserMiddleware.JWTAuthentification, UserController.updateUser)
+app.patch("/user/resetPassword", UserController.resetPassword)
+app.patch("/user/updatePassword", UserMiddleware.JWTAuthentification, UserController.updatePassword)
+app.patch("/user/photos", UserMiddleware.JWTAuthentification, UserController.uploadProfilePicture)
 
 
 //////////////////////        M O V I E S        ////////////////////// 

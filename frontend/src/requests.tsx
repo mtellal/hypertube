@@ -58,7 +58,7 @@ export async function signupRequest(data: DataSignupRequest) {
 
 export async function resetPasswordRequest(email: string) {
     return (
-        axios.post(`${apiURL}/user/resetPassword`, {
+        axios.patch(`${apiURL}/user/resetPassword`, {
             email
         })
     )
@@ -66,7 +66,7 @@ export async function resetPasswordRequest(email: string) {
 
 export async function updatePasswordRequest(token: string, password: string) {
     return (
-        axios.post(`${apiURL}/user/updatePassword`, {
+        axios.patch(`${apiURL}/user/updatePassword`, {
             password,
             token
         })
@@ -82,7 +82,7 @@ type DataUpdateUserRequest = {
 
 export async function updateUserRequest(user: DataUpdateUserRequest) {
     return (
-        axios.post(`${apiURL}/user/update`, { ...user })
+        axios.patch(`${apiURL}/user/update`, { ...user })
     )
 }
 
@@ -90,7 +90,7 @@ export async function updatePhotosRequest(photoFile: File) {
     const formFiles = new FormData();
     formFiles.append('file', photoFile)
     return (
-        axios.post(`${apiURL}/user/photos`, formFiles, {
+        axios.patch(`${apiURL}/user/photos`, formFiles, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
