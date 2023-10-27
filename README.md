@@ -56,6 +56,8 @@ In the `backend/.env` file set:
 ![alt text](./assets/signup.png)
 ![alt text](./assets/profile.png)
 ![alt text](./assets/thumbnails.png)
+![alt text](./assets/movieFilter.png)
+![alt text](./assets/movieSort.png)
 ![alt text](./assets/moviePage.png)
 ![alt text](./assets/moviePlayer.png)
 ![alt text](./assets/movieComments.png)
