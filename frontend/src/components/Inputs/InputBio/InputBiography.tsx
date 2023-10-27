@@ -1,8 +1,8 @@
-import React from "react";
+import { ChangeEvent } from "react";
 
 import './InputBiography.css'
 
-type TInput = {
+type InputBiographyProps = {
     title: string,
     value: string,
     setValue: (s: string) => void,
@@ -13,10 +13,9 @@ type TInput = {
     styleTextArea?: {},
 }
 
+export default function InputBiography(props: InputBiographyProps) {
 
-export default function InputBiography(props: TInput) {
-
-    function onChange(e: any) {
+    function onChange(e: ChangeEvent<HTMLTextAreaElement>) {
         props.setValue(e.target.value);
     }
 
@@ -29,7 +28,7 @@ export default function InputBiography(props: TInput) {
                 style={props.styleTextArea}
                 placeholder={props.placeholder}
                 value={props.value}
-                onInput={onChange}
+                onChange={onChange}
                 maxLength={props.maxLength}
                 rows={15}
                 disabled={props.ronly}

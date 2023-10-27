@@ -2,7 +2,7 @@
 
 import './Input.css'
 
-type TInput = {
+type InputProps = {
     value: string,
     setValue: (s: string) => void,
     placeholder: string,
@@ -14,7 +14,7 @@ type TInput = {
 }
 
 
-export default function Input(props: TInput) {
+export default function Input(props: InputProps) {
 
     function onChange(e: React.ChangeEvent<HTMLInputElement>) {
         props.setValue(e.target.value);

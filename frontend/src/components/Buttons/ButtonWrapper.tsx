@@ -1,15 +1,16 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 import './ButtonWrapper.css'
 
-export function ButtonWrapper({children, ...props} : any)
+type ButtonWrapperProps = {
+    children: ReactNode, 
+    onClick: () => {}
+}
+
+export function ButtonWrapper({children, onClick} : ButtonWrapperProps)
 {
     return (
-        <button
-            className="buttonwrapper"
-            onClick={props.onClick}
-            {...props}
-        >
+        <button className="buttonwrapper" onClick={onClick} >
             {children}
         </button>
     )

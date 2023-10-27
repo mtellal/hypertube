@@ -1,24 +1,21 @@
-
-
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Icon } from '../../Icons/Icon';
 import './InputIconPassword.css'
 
 import eyeIcon from '../../../assets/eye.svg'
 
-type TInputIconPassword = {
+type InputIconPasswordProps = {
     value: string,
     setValue: (s: string) => void,
     placeholder: string,
     maxLength: number,
-    onSubmit?: () => void,
     style?: {}
     onChange?: () => void,
+    onSubmit?: () => void,
 
 }
 
-
-export function InputIconPassword(props: TInputIconPassword) {
+export function InputIconPassword(props: InputIconPasswordProps) {
 
     const [type, setType] = useState("password");
 

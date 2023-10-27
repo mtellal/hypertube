@@ -1,8 +1,15 @@
 import React from 'react'
 import './Icon.css'
 
+type IconProps = {
+    icon: string
+    onClick?: () => void,
+    style?: any
+    disableHover?: boolean
+    className?: string
+}
 
-export const IconRef = React.forwardRef((props: any, ref: React.RefObject<any>) => {
+export const IconRef = React.forwardRef((props: IconProps, ref: React.RefObject<any>) => {
     return (
         <div ref={ref} style={{ position: 'relative' }}>
             <img
@@ -11,12 +18,11 @@ export const IconRef = React.forwardRef((props: any, ref: React.RefObject<any>) 
                 src={props.icon}
                 onClick={props.onClick}
             />
-            {props.notif > 0 && <div className='icon-notif'></div>}
         </div>
     )
 })
 
-export function Icon(props: any) {
+export function Icon(props: IconProps) {
     return (
         <div style={{ position: 'relative' }}>
             <img
@@ -25,7 +31,6 @@ export function Icon(props: any) {
                 src={props.icon}
                 onClick={props.onClick}
             />
-            {props.notif > 0 && <div className='icon-notif'></div>}
         </div>
     )
 }

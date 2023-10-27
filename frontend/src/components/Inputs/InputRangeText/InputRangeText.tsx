@@ -1,10 +1,7 @@
 import React from "react";
-
-
 import './InputRangeText.css'
-import { Icon } from "../../Icons/Icon";
 
-type TInput = {
+type InputRangeTextProps = {
     label: string,
     value1: string,
     setValue1: (s: string) => void,
@@ -15,11 +12,11 @@ type TInput = {
     maxLength: number,
     onSubmit?: () => void,
     style?: {},
-    onChange?: (((s: any) => void) | (() => void)),
+    onChange?: (((s: string) => void) | (() => void)),
 }
 
 
-export default function InputRangeText(props: TInput) {
+export default function InputRangeText(props: InputRangeTextProps) {
     function onChange1(e: React.ChangeEvent<HTMLInputElement>) {
         if (!e.target.value ||
             (e.target.value.match(/[0-9]/g))) {

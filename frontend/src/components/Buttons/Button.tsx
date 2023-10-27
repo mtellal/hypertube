@@ -1,8 +1,12 @@
-import React from 'react';
-
 import './Button.css'
 
-export function Button(props: any)
+type ButtonProps = {
+    title: string, 
+    onClick: () => void,
+    style?: any
+}
+
+export function Button(props: ButtonProps)
 {
     return (
         <button

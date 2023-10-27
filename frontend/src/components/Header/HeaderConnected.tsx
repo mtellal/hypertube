@@ -4,7 +4,6 @@ import './Header.css'
 import { ButtonBorder, ButtonBorderMenu } from "../Buttons/ButtonBorder";
 import { ProfilePicture } from "../ProfilePicture/ProfilePicture";
 
-
 import { useNavigate } from "react-router";
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import MobileHeaderMenu from './MobileHeaderMenu/MobileHeaderMenu';
@@ -13,12 +12,13 @@ import { useCurrentUser } from '../../contexts/UserContext';
 import { useLanguage } from '../../contexts/language';
 
 import languages from '../../languages/languages';
+import { SyntheticEvent } from 'react';
 
-type TUserInfos = {
+type UserInfosProps = {
     language: any
 }
 
-function UserInfos(props: TUserInfos) {
+function UserInfos(props: UserInfosProps) {
 
     const { currentUser } = useCurrentUser();
     const navigate = useNavigate();
@@ -41,15 +41,14 @@ function UserInfos(props: TUserInfos) {
     )
 }
 
-
 export function LanguagesPref() {
 
     const { setLanguage } = useLanguage();
 
-    function handleChange(e: any) {
-        if (e.target.value) {
+    function handleChange(e: SyntheticEvent<HTMLSelectElement>) {
+        if (e.currentTarget.value) {
             for (let [key, value] of Object.entries(languages)) {
-                if (key === e.target.value) {
+                if (key === e.currentTarget.value) {
                     localStorage.setItem("prefLanguage", key)
                     setLanguage(value)
                 }
@@ -61,7 +60,12 @@ export function LanguagesPref() {
 
     return (
         <div className='header-select-c'>
-            <select className='header-select' id="lang" onChange={handleChange} defaultValue={localStorage.getItem("prefLanguage") || "english"}>
+            <select
+                className='header-select'
+                id="lang"
+                onChange={handleChange}
+                defaultValue={localStorage.getItem("prefLanguage") || "english"}
+            >
                 {
                     languagesTab.map((l: string) =>
                         <option key={l} value={l}>{l}</option>
@@ -73,11 +77,11 @@ export function LanguagesPref() {
 }
 
 
-type THeaderProps = {
+type HeaderConnectedProps = {
     status: string
 }
 
-export default function HeaderConnected({ status }: THeaderProps) {
+export default function HeaderConnected({ status }: HeaderConnectedProps) {
 
     const { width } = useWindowDimensions();
 

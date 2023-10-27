@@ -17,7 +17,7 @@ export default function MobileHeaderMenu() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [paths, setPaths]: [TPath[], any] = useState([]);
+    const [paths, setPaths] = useState<TPath[]>([]);
     const [picking, setPicking] = useState(false);
     const buttonRef = useRef(null);
 

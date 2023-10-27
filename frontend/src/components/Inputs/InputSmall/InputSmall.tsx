@@ -4,7 +4,7 @@ import React from "react";
 import './InputSmall.css'
 import { Icon } from "../../Icons/Icon";
 
-type TInput = {
+type InputSmallProps = {
     label: string,
     value: string,
     setValue: (s: string) => void,
@@ -12,14 +12,14 @@ type TInput = {
     maxLength?: number,
     onSubmit?: () => void,
     style?: {},
-    icon?: boolean,
+    icon?: string,
     onClick?: () => void,
-    onChange?: (((s: any) => void) | (() => void))
+    onChange?: (((s: string) => void) | (() => void))
     type?: string
 }
 
 
-export default function InputSmall(props: TInput) {
+export default function InputSmall(props: InputSmallProps) {
     function onChange(e: React.ChangeEvent<HTMLInputElement>) {
         props.setValue(e.target.value);
         if (props.onChange)

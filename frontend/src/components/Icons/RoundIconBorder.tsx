@@ -1,5 +1,3 @@
-import React from "react";
-
 import './RoundIconBorder.css'
 
 export function RoundIconBorder(props: any)
@@ -10,10 +8,7 @@ export function RoundIconBorder(props: any)
             onClick={props.onClick}
             style={props.style}
         >
-            <img 
-                className="roundicon-img"
-                src={props.icon}
-            />
+            <img className="roundicon-img" src={props.icon} />
         </button>
     )
 } 
