@@ -22,7 +22,7 @@ In the `backend/.env` file set:
 
 ## Frontend
 
-### The stack 
+### Stack 
 - React
 - Typescript
 - Axios
@@ -43,7 +43,7 @@ In the `backend/.env` file set:
 
 ## Backend
 
-### The stack
+### Stack
 - NodeJs
 - Express
 - Mariadb
@@ -53,3 +53,11 @@ In the `backend/.env` file set:
 - Movies informations fetched from two differents services (yts and themoviedb)
 - Download and stream movies in the more efficient way
 - Get users, comments and movies available
+
+![alt text](./assets/signin.png)
+![alt text](./assets/signup.png)
+![alt text](./assets/profile.png)
+![alt text](./assets/thumbnails.png)
+![alt text](./assets/moviePage.png)
+![alt text](./assets/moviePlayer.png)
+![alt text](./assets/movieComments.png)
