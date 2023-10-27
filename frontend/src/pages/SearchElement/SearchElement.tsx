@@ -1,7 +1,7 @@
 
 import { useNavigate, useParams } from 'react-router'
 import './SearchElement.css'
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 import { useVideoContext } from '../../contexts/VideosProvider';
 import { getMovieDetailsRequest, getMovieRequest } from '../../requests';
 
@@ -13,6 +13,8 @@ import Crew from './Crew';
 import playButtonIcon from '../../assets/play-button.svg'
 import { getMovieSubtitlesRequest } from '../../requests';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
+import { Subtitle } from '../../types';
+import { AxiosResponse } from 'axios';
 
 export function Informations({ video }: any) {
     return (
@@ -28,32 +30,40 @@ export function Informations({ video }: any) {
 
 export default function SearchElement() {
 
-    const { width } = useWindowDimensions();
-
     const navigate = useNavigate();
-    const { videos, videosLoaded } = useVideoContext();
     const { imdb_code } = useParams();
-    const [video, setVideo]: any = useState();
+    const { width } = useWindowDimensions();
+    const { videos, videosLoaded } = useVideoContext();
 
+    const [video, setVideo]: any = useState();
+    const [subtitles, setSubtitles] = useState<Subtitle[]>()
     const [torrentHashPicked, setTorrentHashPicked] = useState()
-    const [subtitles, setSubtitles]: any = useState()
-    const videoRef: any = useRef();
+
+    const videoRef: RefObject<HTMLVideoElement> = useRef();
 
     async function fetchMovieDetails(video: any) {
-        getMovieDetailsRequest(video.imdb_code)
-            .then(res => { if (res && res.status === 200 && res.data) setVideo({ ...res.data.data, ...video }) })
-            .catch(() => {})
+        try {
+            const res = await getMovieDetailsRequest(video.imdb_code)
+            if (res && res.status === 200 && res.data)
+                setVideo({ ...res.data.data, ...video })
+        }
+        catch (e) {
+            // console.log(e)
+        }
     }
 
     async function getMovie(imdb_code: string) {
         let data: any = null;
-        await getMovieRequest({ imdb_code })
-            .then((res: any) => {
-                if (res && res.data && res.data.data &&
-                    res.data.data.data && res.data.data.data.movie)
-                    data = res.data.data.data.movie
-            })
-            .catch(() => navigate("/search"))
+        try {
+            const res = await getMovieRequest({ imdb_code })
+            if (res && res.data && res.data.data &&
+                res.data.data.data && res.data.data.data.movie)
+                data = res.data.data.data.movie
+        }
+        catch (e) {
+            // console.log(e)
+            navigate("/search")
+        }
         return (data)
     }
 
@@ -75,23 +85,24 @@ export default function SearchElement() {
 
     useEffect(() => {
         if (video) {
-            getMovieSubtitlesRequest(video.title_long || video.title, video.imdb_code, localStorage.getItem("prefLanguage") || "")
-                .then((res: any) => {
+            getMovieSubtitlesRequest(video.title_long || video.title,
+                video.imdb_code, localStorage.getItem("prefLanguage") || "")
+                .then((res: AxiosResponse) => {
                     if (res.data && res.data.data) {
                         setSubtitles(res.data.data)
                     }
                 })
-                .catch(() => {})
+                .catch(() => { })
         }
     }, [video])
 
     const handleTorrentLink = useCallback((t: any) => {
         if (videoRef.current && video) {
             setTorrentHashPicked(t.hash)
-            videoRef.current.src = `http://${process.env.REACT_APP_BACK_DOMAIN}:3000/movie/stream?imdb_code=${video.imdb_code}&hash=${t.hash}&url=${t.url}`
+            videoRef.current.src =
+                `http://${process.env.REACT_APP_BACK_DOMAIN}:3000/movie/stream?imdb_code=${video.imdb_code}&hash=${t.hash}&url=${t.url}`
         }
     }, [videoRef.current, video])
-
 
     return (
         <div className="searchelm">
@@ -104,7 +115,7 @@ export default function SearchElement() {
                         <source src={torrentHashPicked && video ? `http://${process.env.REACT_APP_BACK_DOMAIN}:3000/user/stream?imdb_code=${video.imdb_code}&hash=${torrentHashPicked}` : ''} type='video/webm'></source>
                         {
                             subtitles && subtitles.length > 0 &&
-                            subtitles.map((s: any) =>
+                            subtitles.map((s: Subtitle) =>
                                 <track
                                     key={s.id}
                                     kind='subtitles'
@@ -125,8 +136,7 @@ export default function SearchElement() {
                                     key={t.hash}
                                     className='torrent-element'
                                     onClick={() => handleTorrentLink(t)}
-                                    style={t.hash === torrentHashPicked ? { backgroundColor: 'var(--primary4)' } : {}}
-                                >
+                                    style={t.hash === torrentHashPicked ? { backgroundColor: 'var(--primary4)' } : {}}>
                                     <img className='torrent-playbutton' src={playButtonIcon} />
                                     <p>{t.quality}</p>
                                     <p>{t.type}</p>
@@ -137,16 +147,15 @@ export default function SearchElement() {
                             )
                         }
                     </div>
-
                 }
                 <div className='searchelm-desc'>
                     <h1>Sumarize</h1>
                     <p>{video && video.description_full}</p>
                 </div>
-            <Informations video={video} />
-            <Cast video={video} />
-            <Crew video={video} />
-            <Comments video={video} />
+                <Informations video={video} />
+                <Cast video={video} />
+                <Crew video={video} />
+                <Comments video={video} />
             </div>
         </div >
     )

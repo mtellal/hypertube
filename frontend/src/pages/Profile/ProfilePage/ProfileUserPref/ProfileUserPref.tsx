@@ -1,7 +1,6 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import './ProfileUserPref.css'
-
 
 import pencilIconBlack from '../../../../assets/Edit_Pencil Black.svg'
 import checkIconBlack from '../../../../assets/Check Black.svg'
@@ -75,12 +74,11 @@ export default function ProfileUserPref() {
 
     const { language } = useLanguage();
     const { currentUser, setCurrentUser } = useCurrentUser()
-    const [editing, setEditing] = useState(false)
 
-    const [profileUser, setProfileUser] = useState<User>()
-
-    const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+    const [editing, setEditing] = useState(false)
+    const [profileUser, setProfileUser] = useState<User>()
 
 
     useEffect(() => {
@@ -89,7 +87,7 @@ export default function ProfileUserPref() {
         }
     }, [currentUser])
 
-    function validInputs(user: any) {
+    function validInputs(user: User) {
         if (!validateEmail(user.email.trim())) {
             setError("Invalid email")
             return (false);
@@ -126,21 +124,21 @@ export default function ProfileUserPref() {
                 }
             }
             if (update) {
-                await updateUserRequest(updateDatas)
-                    .then(res => {
-                        setCurrentUser(profileUser)
-                        if (res && res.data && res.data.message)
-                            setSuccess(res.data.message)
-                        else
-                            setSuccess("Update user infos succeed")
-                    })
-                    .catch(err => {
-                        setProfileUser(currentUser)
-                        if (err && err.response && err.response.data && err.response.data.message)
-                            setError(err.response.data.message)
-                        else
-                            setError("Update user infos failed")
-                    })
+                try {
+                    const res = await updateUserRequest(updateDatas)
+                    setCurrentUser(profileUser)
+                    if (res && res.data && res.data.message)
+                        setSuccess(res.data.message)
+                    else
+                        setSuccess("Update user infos succeed")
+                }
+                catch (err) {
+                    setProfileUser(currentUser)
+                    if (err && err.response && err.response.data && err.response.data.message)
+                        setError(err.response.data.message)
+                    else
+                        setError("Update user infos failed")
+                }
             }
         }
         setEditing((p: boolean) => !p)
@@ -148,18 +146,29 @@ export default function ProfileUserPref() {
 
     return (
         <div className="profileuserpref-informations" style={{ position: 'relative' }}>
-            {error && <p className="font-14" style={{ color: 'var(--red)' }}>{error}</p>}
-            {success && <p className="font-14" style={{ color: 'var(--green)' }}>{success}</p>}
+            {error && <p className="font-14 error-msg" >{error}</p>}
+            {success && <p className="font-14 success-msg" >{success}</p>}
             {
                 editing ?
-
                     <ProfileUserPrefEdit user={profileUser} setUser={setProfileUser} />
                     :
                     <>
-                        <InfoLabel title={language && language.Email} text={profileUser && profileUser.email || "Not specified"} />
-                        <InfoLabel title={language && language.profile.FirstName} text={profileUser && profileUser.firstName || "Not specified"} />
-                        <InfoLabel title={language && language.profile.LastName} text={profileUser && profileUser.lastName || "Not specified"} />
-                        <InfoLabel title={language && language.profile.Username} text={profileUser && profileUser.username || "Not specified"} />
+                        <InfoLabel
+                            title={language && language.Email}
+                            text={profileUser && profileUser.email || "Not specified"}
+                        />
+                        <InfoLabel
+                            title={language && language.profile.FirstName}
+                            text={profileUser && profileUser.firstName || "Not specified"}
+                        />
+                        <InfoLabel
+                            title={language && language.profile.LastName}
+                            text={profileUser && profileUser.lastName || "Not specified"}
+                        />
+                        <InfoLabel
+                            title={language && language.profile.Username}
+                            text={profileUser && profileUser.username || "Not specified"}
+                        />
                     </>
             }
             <div className="profileuserpref-informations-editicon" >

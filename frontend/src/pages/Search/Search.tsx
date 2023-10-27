@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { SyntheticEvent, useCallback, useEffect, useRef } from 'react'
 import SearchBar from '../../components/Inputs/SearchBar/SearchBar'
 import './Search.css'
 import { Button } from '../../components/Buttons/Button';
@@ -10,6 +10,11 @@ import MenuFilter from './Filter/Filter';
 import { useNavigate } from 'react-router';
 import { useLanguage } from '../../contexts/language';
 import { useCurrentUser } from '../../contexts/UserContext';
+
+export type SearchOptionsProps = {
+    title: string, 
+    valid: () => void
+}
 
 function SearchOptions() {
 
@@ -36,9 +41,9 @@ function SearchOptions() {
 
 export default function Search() {
 
-    const { currentUser } = useCurrentUser();
-    const { language } = useLanguage()
     const navigate = useNavigate();
+    const { language } = useLanguage()
+    const { currentUser } = useCurrentUser();
 
     const {
         loadVideos,
@@ -51,10 +56,9 @@ export default function Search() {
         setVideoValue
     } = useVideoContext();
 
-
-    const searchRef: React.MutableRefObject<HTMLDivElement> = useRef();
-    const loadingVideosRef = useRef(false);
     const scrollInitRef = useRef(false);
+    const loadingVideosRef = useRef(false);
+    const searchRef: React.MutableRefObject<HTMLDivElement> = useRef();
 
     useEffect(() => {
         if (!scrollInitRef.current && scrollHeightRef.current && searchRef.current) {
@@ -63,10 +67,10 @@ export default function Search() {
     }, [scrollHeightRef.current, searchRef.current])
 
 
-    const handleScroll = useCallback(async (e: any) => {
-        scrollHeightRef.current = e.target.scrollTop
+    const handleScroll = useCallback(async (e: SyntheticEvent) => {
+        scrollHeightRef.current = e.currentTarget.scrollTop
         if (!loadingVideosRef.current &&
-            e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 50) {
+            e.currentTarget.scrollHeight - e.currentTarget.scrollTop - e.currentTarget.clientHeight < 50) {
             loadingVideosRef.current = true;
             await loadMoreVideos(videoValue);
             loadingVideosRef.current = false;
@@ -77,18 +81,8 @@ export default function Search() {
         loadVideos(videoValue)
     }
 
-    useEffect(() => {
-        if (searchRef.current) {
-            searchRef.current.addEventListener('scroll', handleScroll)
-        }
-        return () => {
-            if (searchRef.current)
-                searchRef.current.removeEventListener('scroll', handleScroll);
-        }
-    }, [searchRef.current, videoValue])
-
     return (
-        <div ref={searchRef} className='search'>
+        <div ref={searchRef} onScroll={handleScroll} className='search'>
             <ModalPage>
                 <div className='search-inputs'>
                     <div>

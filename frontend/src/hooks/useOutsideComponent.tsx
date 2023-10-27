@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 
-
 export function useOutsideComponent(ref: React.RefObject<any>, f: (e: any) => void) {
     useEffect(() => {
         if (ref.current && f) {

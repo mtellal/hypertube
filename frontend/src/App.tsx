@@ -4,11 +4,8 @@ import Header from './components/Header/Header';
 import { Outlet, redirect, useLoaderData } from 'react-router';
 import { getUserPhotoRequest, getUserRequest } from './requests';
 import { UserProvider } from './contexts/UserContext';
-
 import movieFilms from './assets/Film rolls-rafiki.svg'
-
 import films from './assets/films.svg'
-
 import './pages/Singin/SigninPage.css'
 import VideoProvider from './contexts/VideosProvider';
 import { LanguageProvier } from './contexts/language';

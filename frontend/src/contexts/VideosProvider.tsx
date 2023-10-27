@@ -1,21 +1,23 @@
-import { createContext, useContext, useEffect, useReducer, useRef, useState } from "react";
+import { MutableRefObject, ReactNode, Ref, RefObject, createContext, useContext, useEffect, useReducer, useRef, useState } from "react";
 import { getMovieRequest } from "../requests";
+import { Filter } from "../pages/Search/Filter/Filter";
+import { Sort } from "../pages/Search/Sort/Sort";
 
 type TVideoContext = {
-    loadVideos: any,
-    videosIdsRef: any,
+    loadVideos: (s: string) => void,
+    videosIdsRef: MutableRefObject<number[]>,
     videos: any,
-    videosDispatch: any,
-    filterIds: any,
-    setFilterIds: any,
-    loadMoreVideos: any,
-    filterConfigRef: any,
-    sortConfigRef: any,
-    scrollHeightRef: any,
-    pageRef: any,
+    videosDispatch: (opt: any) => void,
+    filterIds: number[],
+    setFilterIds: (ids: number[]) => void,
+    loadMoreVideos: (s: string) => void,
+    filterConfigRef: MutableRefObject<Filter>,
+    sortConfigRef: MutableRefObject<Sort>,
+    scrollHeightRef: MutableRefObject<number>,
+    pageRef: MutableRefObject<number>,
     movieCount: number,
-    videoValue: any, 
-    setVideoValue: any,
+    videoValue: string,
+    setVideoValue: (s: string) => void,
     videosLoaded: boolean,
 }
 
@@ -35,13 +37,6 @@ export function videoReducer(videos: any, action: any) {
             if (action.videos && action.videos)
                 return ([...videos, ...action.videos])
         }
-        case ('resetOriginal'): {
-            if (action.videos && action.videos.length) {
-                return (
-                    action.videos.map((id: number) => videos.find((u: any) => u.id === id))
-                )
-            }
-        }
         case ('addVideo'): {
             if (action.video)
                 return ([...videos, action.video])
@@ -49,22 +44,15 @@ export function videoReducer(videos: any, action: any) {
         case ('removeVideos'): {
             return ([]);
         }
-        case ('sortYounger'): {
-            return (
-                [...videos.sort((u1: any, u2: any) => parseInt(u1.age) - parseInt(u2.age))]
-            )
-        }
-        case ('sortOlder'): {
-            return (
-                [...videos.sort((u1: any, u2: any) => parseInt(u2.age) - parseInt(u1.age))]
-            )
-        }
         default: return videos;
     }
 }
 
+type VideoProviderProps = {
+    children: ReactNode
+}
 
-export default function VideoProvider({ children }: any) {
+export default function VideoProvider({ children }: VideoProviderProps) {
 
     const [videos, videosDispatch] = useReducer(videoReducer, []);
     const [filterIds, setFilterIds] = useState([]);
@@ -87,7 +75,7 @@ export default function VideoProvider({ children }: any) {
         pageRef.current++;
         let data = await getMovieRequest({ movie, page: pageRef.current })
             .then(res => res && res.status === 200 && res.data && res.data.data ? res.data.data.data : null)
-            .catch(() => {})
+            .catch(() => { })
 
         if (data) {
             if (data.movies) {
@@ -107,10 +95,9 @@ export default function VideoProvider({ children }: any) {
 
         videosDispatch({ type: 'removeVideos' });
 
-
         let data = await getMovieRequest({ movie, page: pageRef.current })
             .then(res => res && res.status === 200 && res.data && res.data.data ? res.data.data.data : null)
-            .catch(() => {})
+            .catch(() => { })
 
         if (data) {
             if (data.movies) {
@@ -142,7 +129,7 @@ export default function VideoProvider({ children }: any) {
                 scrollHeightRef,
                 pageRef,
                 movieCount,
-                videoValue, 
+                videoValue,
                 setVideoValue,
                 videosLoaded
             }}

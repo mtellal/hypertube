@@ -2,26 +2,25 @@ import { useCallback, useEffect, useState } from "react";
 
 import './ProfileCurrentUser.css'
 
-
 import PhotoCarousel from "../../../components/PhotoCarousel/PhotoCarousel";
-import PickPhotos from "../../../components/PickPhotos/PickPhotos";
-
+import PickPhotos, { TPhoto } from "../../../components/PickPhotos/PickPhotos";
 
 import ProfileUserPref from "../ProfilePage/ProfileUserPref/ProfileUserPref";
 
 import { updatePhotosRequest } from "../../../requests";
 import { useCurrentUser } from "../../../contexts/UserContext";
+import { User } from "../../../types";
 
 export default function ProfileCurrentUser() {
 
     const { currentUser, setCurrentUser } = useCurrentUser();
 
-    const [profileUser, setProfileUser]: any = useState();
-    const [editPhotos, setEditPhotos] = useState(false);
-    const [photo, setPhoto]: any = useState();
-
-    const [success, setSuccess] = useState("")
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("")
+
+    const [photo, setPhoto] = useState<TPhoto | string>()
+    const [editPhotos, setEditPhotos] = useState(false);
+    const [profileUser, setProfileUser] = useState<User>();
 
     useEffect(() => {
         if (currentUser) {
@@ -35,16 +34,14 @@ export default function ProfileCurrentUser() {
         setError("");
         setSuccess("");
         setEditPhotos((p: boolean) => !p);
-        if (photo && photo.url && photo.file) {
-            if (photo.file.type !== "image/jpeg") {
+        if (photo && (photo as TPhoto).url && (photo as TPhoto).file) {
+            if ((photo as TPhoto).file.type !== "image/jpeg")
                 return (setError("Invalid type of image (valid extension .jpeg)"));
-            }
-            if (photo.file.size >= 1024 * 1024 * 10) {
+            if ((photo as TPhoto).file.size >= 1024 * 1024 * 10)
                 return (setError("File too long (max size 10MB"))
-            }
-            setCurrentUser((u: any) => ({ ...u, photo: photo.url }))
+            setCurrentUser((u: User) => ({ ...u, photo: (photo as TPhoto).url }))
             try {
-                const res = await updatePhotosRequest(photo.file)
+                const res = await updatePhotosRequest((photo as TPhoto).file)
                 if (res && res.data && res.data.message)
                     setSuccess(res.data.message)
                 else
@@ -62,14 +59,11 @@ export default function ProfileCurrentUser() {
     return (
         <div className="profilepage-c">
             <div className="profilecurrentuser">
-                <div style={{
-                    height: '100%',
-                    flex: 2, justifyContent: 'center', alignItems: 'center'
-                }}>
+                <div style={{ height: '100%', flex: 2, justifyContent: 'center', alignItems: 'center' }}>
                     <div className="profilecurrentuser-carousel">
                         <div style={{ paddingBottom: '10px' }}>
-                            {error && <p className="font-14" style={{ color: 'var(--red)' }}>{error}</p>}
-                            {success && <p className="font-14" style={{ color: 'var(--green)' }}>{success}</p>}
+                            {error && <p className="font-14 error-msg">{error}</p>}
+                            {success && <p className="font-14 success-msg">{success}</p>}
                         </div>
                         {
                             editPhotos ?
@@ -82,15 +76,12 @@ export default function ProfileCurrentUser() {
                                     editClick={updatePhotos}
                                 /> :
                                 <PhotoCarousel
-                                    user={profileUser}
-                                    isCurrentUser={true}
                                     onClickIcon={() => setEditPhotos((p: boolean) => !p)}
-                                    photo={photo}
+                                    photo={photo as string}
                                 />
                         }
                     </div>
                 </div>
-
                 <div className="profilecurrentuser-infos">
                     <ProfileUserPref />
                 </div>

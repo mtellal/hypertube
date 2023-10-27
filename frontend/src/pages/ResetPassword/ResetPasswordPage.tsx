@@ -1,6 +1,6 @@
 
 import './ResetPasswordPage.css'
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ButtonLarge } from '../../components/Buttons/ButtonLarge';
 import { useNavigate } from 'react-router';
 import { updatePasswordRequest } from '../../requests';
@@ -9,23 +9,17 @@ import { useSearchParams } from 'react-router-dom';
 import { InputIconPassword } from '../../components/Inputs/InputIconPassword/InputIconPassword';
 import { useLanguage } from '../../contexts/language';
 
-type Tsigninpage = any | {
-    user: any,
-    status: string
-}
-
-
-export default function ResetPasswordPage(props: Tsigninpage) {
+export default function ResetPasswordPage() {
 
     const navigate = useNavigate();
+    const { language } = useLanguage();
     const [params, setParams] = useSearchParams();
     const [urlParams, searchParams] = useSearchParams();
-    const { language } = useLanguage();
 
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
     useEffect(() => {
         if (params && !params.get("token"))
@@ -46,24 +40,6 @@ export default function ResetPasswordPage(props: Tsigninpage) {
         return (msg)
     }, [language])
 
-    function handleError(err: any) {
-        if (err.response.data && err.response.data.message) {
-            if (err.response.data.message === "Invalid token")
-                setError(translateMessage("Session expired, please ask a new mail"));
-            else
-                setError(err.response.data.message);
-        }
-        else
-            setError(err.responde.statusText);
-    }
-
-
-    function handleSuccess(res: any) {
-        if (res.data && res.data.message) {
-            navigate("/signin", { state: { message: "Password updated" } })
-        }
-    }
-
     async function onSubmit() {
         setError("");
         setSuccess("");
@@ -75,9 +51,23 @@ export default function ResetPasswordPage(props: Tsigninpage) {
             return (setError(translateMessage("Confirm password required")));
         if (_password !== _confirmPassword)
             return (setError(translateMessage("Password and Confirm password different")));
-        await updatePasswordRequest(urlParams.get("token"), _password)
-            .then(res => handleSuccess(res))
-            .catch(err => handleError(err))
+        try {
+            const res = await updatePasswordRequest(urlParams.get("token"), _password)
+            if (res.data && res.data.message) {
+                navigate("/signin", { state: { message: "Password updated" } })
+            }
+        }
+        catch (err) {
+            // console.log(err)
+            if (err.response.data && err.response.data.message) {
+                if (err.response.data.message === "Invalid token")
+                    setError(translateMessage("Session expired, please ask a new mail"));
+                else
+                    setError(err.response.data.message);
+            }
+            else
+                setError(err.response.statusText);
+        }
     }
 
     function resetInfo() {
@@ -94,8 +84,8 @@ export default function ResetPasswordPage(props: Tsigninpage) {
             <p className='resetpage-description'>{language && language.resetPassword.titleDesc}</p>
 
             <div className='resetpage-input-c' style={{ position: 'relative' }}>
-                {error && <p style={{ margin: '0', position: 'absolute', top: '-5vh', color: 'var(--red)' }}>{error}</p>}
-                {success && <p style={{ margin: '0', position: 'absolute', top: '-5vh', color: 'var(--green)' }}>{success}</p>}
+                {error && <p className='error-msg' style={{ position: 'absolute', top: '-5vh' }}>{error}</p>}
+                {success && <p className='success-msg' style={{ position: 'absolute', top: '-5vh' }}>{success}</p>}
 
                 <InputIconPassword
                     placeholder={language && language.resetPassword.NewPassword}
@@ -123,7 +113,11 @@ export default function ResetPasswordPage(props: Tsigninpage) {
                     />
                     <div style={{ display: 'flex', marginTop: '5px' }}>
                         <p className='resetpage-fpass-raw'>{language && language.haveAccount}</p>
-                        <p onClick={() => navigate("/signin")} className='resetpage-fpass' style={{ paddingLeft: '5px' }}>{language && language.authenticateHere}</p>
+                        <p
+                            onClick={() => navigate("/signin")}
+                            className='resetpage-fpass'
+                            style={{ paddingLeft: '5px' }}
+                        >{language && language.authenticateHere}</p>
                     </div>
                 </div>
             </div>

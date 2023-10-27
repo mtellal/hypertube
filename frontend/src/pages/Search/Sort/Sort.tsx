@@ -1,17 +1,25 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import PickMenuSmall from "../../../components/Picker/PickMenuSmall/PickMenuSmall";
+import { useEffect, useRef, useState } from "react";
+import PickMenuSmall from "../../../components/PickMenuSmall/PickMenuSmall";
 import { useVideoContext } from "../../../contexts/VideosProvider";
 
 import './Sort.css'
 import { ButtonBorder } from "../../../components/Buttons/ButtonBorder";
 import { useOutsideComponent } from "../../../hooks/useOutsideComponent";
 import InputSmall from "../../../components/Inputs/InputSmall/InputSmall";
+import { SearchOptionsProps } from "../Search";
 
-export default function MenuSort(props: any) {
+export type Sort = {
+    name: string, 
+    genre: string, 
+    grade: string,
+    productionYear: string
+}
+
+export default function MenuSort(props: SearchOptionsProps) {
 
     const { sortConfigRef, videos, videosDispatch } = useVideoContext();
 
-    const [sorts, setSorts] = useState({
+    const [sorts, setSorts] = useState<Sort>({
         name: '',
         genre: '',
         grade: 'none',
@@ -30,7 +38,7 @@ export default function MenuSort(props: any) {
     }, [sortConfigInitRef.current, sortConfigRef.current])
 
     function setName(s: string) {
-        setSorts((f: any) => {
+        setSorts((f: Sort) => {
             const up = { ...f, name: s }
             sortConfigRef.current = up;
             return (up)
@@ -38,7 +46,7 @@ export default function MenuSort(props: any) {
     }
 
     function setGenre(s: string) {
-        setSorts((f: any) => {
+        setSorts((f: Sort) => {
             const up = { ...f, genre: s }
             sortConfigRef.current = up;
             return (up)
@@ -46,7 +54,7 @@ export default function MenuSort(props: any) {
     }
 
     function setGrade(s: string) {
-        setSorts((f: any) => {
+        setSorts((f: Sort) => {
             const up = { ...f, grade: s }
             sortConfigRef.current = up;
             return (up)
@@ -54,13 +62,12 @@ export default function MenuSort(props: any) {
     }
 
     function setProductionYear(s: string) {
-        setSorts((f: any) => {
+        setSorts((f: Sort) => {
             const up = { ...f, productionYear: s }
             sortConfigRef.current = up;
             return (up)
         })
     }
-
 
     useEffect(() => {
         let weights = 0;
@@ -69,8 +76,8 @@ export default function MenuSort(props: any) {
                 weights++;
         }
 
-        let users = [...videos];
-        users = users.sort((u1: any, u2: any) => {
+        let _videos = [...videos];
+        _videos = _videos.sort((u1: any, u2: any) => {
 
             let scoreName = 0;
             let scoreGenre = 0;
@@ -85,18 +92,14 @@ export default function MenuSort(props: any) {
                 catch (e) { }
                 try { index2 = u2.title.toLowerCase().search(sorts.name.toLowerCase()) }
                 catch (e) { }
-
                 let scoreNameU1 = (1 / weights) * (index1 === -1 ? 0 : 1 / sorts.name.length);
                 let scoreNameU2 = (1 / weights) * (index2 === -1 ? 0 : 1 / sorts.name.length);
-
                 scoreName = scoreNameU2 - scoreNameU1;
             }
 
             if (sorts.genre && sorts.genre !== "none") {
-
                 let scoreGenreU1 = (1 / weights) * (u1.genres.includes(sorts.genre) ? 1 : 0);
                 let scoreGenreU2 = (1 / weights) * (u2.genres.includes(sorts.genre) ? 1 : 0);
-
                 scoreGenre = scoreGenreU2 - scoreGenreU1;
             }
 
@@ -104,7 +107,6 @@ export default function MenuSort(props: any) {
                 const maxFameRating = Math.max(...videos.map((u: any) => u.rating));
                 let scoreGradeU1 = (1 / weights) * (parseFloat(u1.rating) / maxFameRating);
                 let scoreGradeU2 = (1 / weights) * (parseFloat(u2.rating) / maxFameRating);
-
                 if (sorts.grade === "higher") {
                     scoreGrade = scoreGradeU2 - scoreGradeU1;
                 }
@@ -113,12 +115,9 @@ export default function MenuSort(props: any) {
             }
 
             if (sorts.productionYear !== "none") {
-
                 const maxCommonTags = Math.max(...videos.map((u: any) => parseInt(u.year)));
                 let scoreCommonTagsU1 = (1 / weights) * (parseFloat(u1.year) / maxCommonTags);
                 let scoreCommonTagsU2 = (1 / weights) * (parseFloat(u2.year) / maxCommonTags);
-
-
                 if (sorts.productionYear === "latest") {
                     scoreProductionYear = scoreCommonTagsU2 - scoreCommonTagsU1;
                 }
@@ -127,7 +126,7 @@ export default function MenuSort(props: any) {
             }
             return (scoreName + scoreGenre + scoreGrade + scoreProductionYear);
         })
-        videosDispatch({ type: 'videos', videos: users })
+        videosDispatch({ type: 'videos', videos: _videos })
 
     }, [sorts])
 

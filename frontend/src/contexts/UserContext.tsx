@@ -3,7 +3,7 @@ import { User } from "../types";
 
 export type TCurrentUser = {
     currentUser: User | undefined,
-    setCurrentUser: (u: User | ((u: User) => any)) => void
+    setCurrentUser: (u: User | ((u: User) => void)) => void
 }
 
 const UserContext: React.Context<TCurrentUser | undefined> = createContext(undefined)
@@ -19,11 +19,11 @@ type UserContextProviderProps = {
 
 export function UserProvider({ children, _user }: UserContextProviderProps) {
 
-    const [currentUser, setCurrentUser] = useState();
+    const [currentUser, setCurrentUser] = useState<User>();
 
     useEffect(() => {
         if (_user) {
-            setCurrentUser((u: any) => ({ ...u, ..._user }));
+            setCurrentUser((u: User) => ({ ...u, ..._user }));
         }
     }, [_user])
 

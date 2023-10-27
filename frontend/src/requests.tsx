@@ -36,7 +36,7 @@ export async function signinRequest(username: string, password: string) {
     )
 }
 
-type TSignup = {
+type DataSignupRequest = {
     email: string,
     username: string,
     firstName: string,
@@ -44,7 +44,7 @@ type TSignup = {
     password: string,
 }
 
-export async function signupRequest(data: TSignup) {
+export async function signupRequest(data: DataSignupRequest) {
     return (
         axios.post(`${apiURL}/user/signup`, {
             email: data.email,
@@ -73,13 +73,20 @@ export async function updatePasswordRequest(token: string, password: string) {
     )
 }
 
-export async function updateUserRequest(user: any) {
+type DataUpdateUserRequest = {
+    email?: string,
+    firstName?: string,
+    lastName?: string,
+    username?: string
+}
+
+export async function updateUserRequest(user: DataUpdateUserRequest) {
     return (
         axios.post(`${apiURL}/user/update`, { ...user })
     )
 }
 
-export async function updatePhotosRequest(photoFile: any) {
+export async function updatePhotosRequest(photoFile: File) {
     const formFiles = new FormData();
     formFiles.append('file', photoFile)
     return (
@@ -96,13 +103,13 @@ export async function updatePhotosRequest(photoFile: any) {
 //                          M O V I E                       //
 //////////////////////////////////////////////////////////////
 
-export type TMovieRequest = null | {
+export type MovieRequest = null | {
     movie?: string,
     imdb_code?: string,
     page?: string | number
 }
 
-export async function getMovieRequest(options: TMovieRequest) {
+export async function getMovieRequest(options: MovieRequest) {
     return (axios.get(`${apiURL}/movie?imdb_code=${options.imdb_code || ""}&movie=${options.movie || ""}&page=${options.page}`))
 }
 
@@ -115,7 +122,8 @@ export async function getMovieDetailsRequest(imdb_id: string) {
 //                     S U B T I T L E S                    //
 //////////////////////////////////////////////////////////////
 
-export async function getMovieSubtitlesRequest(title: string, imdb_code: string, preferredLanguage: string = "english") {
+export async function getMovieSubtitlesRequest(title: string,
+    imdb_code: string, preferredLanguage: string = "english") {
     return (axios.get(`${apiURL}/subtitles/list?title=${title}&imdb_code=${imdb_code}&preferredLanguage=${preferredLanguage}`))
 }
 

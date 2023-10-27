@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import languages from '../languages/languages'
 
 type TLanguageContext = {
@@ -8,15 +8,18 @@ type TLanguageContext = {
 
 const LanguageContext = createContext<TLanguageContext>({
     language: "",
-    setLanguage: () => {}
+    setLanguage: () => { }
 })
-
 
 export function useLanguage() {
     return (useContext(LanguageContext))
 }
 
-export function LanguageProvier({ children }: any) {
+type LanguageProvierProps = {
+    children: ReactNode
+}
+
+export function LanguageProvier({ children }: LanguageProvierProps) {
     const [language, setLanguage] = useState(languages.english)
 
     useEffect(() => {

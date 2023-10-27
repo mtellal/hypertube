@@ -5,6 +5,7 @@ import { ButtonBorder } from "../../../components/Buttons/ButtonBorder";
 
 import './Comments.css'
 import { useNavigate } from "react-router";
+import { Comment } from "../../../types";
 
 export default function Comments({ video }: any) {
 
@@ -35,7 +36,7 @@ export default function Comments({ video }: any) {
             </div>
             {
                 video && video.comments && video.comments.length > 0 &&
-                video.comments.map((c: any) =>
+                video.comments.map((c: Comment) =>
                     <div key={c.id} className='comment'>
                         <p
                             className='font-14 comment-profile'

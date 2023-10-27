@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 
 import './PickPhotos.css'
 import { Icon } from "../Icons/Icon";
 
 import addIcon from '../../assets/Add_Plus.svg'
-
-import checkIcon from '../../assets/Check.svg'
 import checkIconBlack from '../../assets/Check Black.svg'
-
 
 import { RoundIconBorder } from "../Icons/RoundIconBorder";
 
+export type TPhoto = {
+    url: string,
+    file: File
+}
+
 type TPhotoLabel = {
     id: number,
-    photo: any,
-    setPhoto: (p: any) => void
+    photo: TPhoto | string,
+    setPhoto: (p: TPhoto | string) => void
     pp?: boolean,
 }
 
@@ -22,7 +24,10 @@ function PhotoLabel(props: TPhotoLabel) {
 
     function onChange(e: React.ChangeEvent<HTMLInputElement>) {
         if (e.target.files) {
-            props.setPhoto({ file: e.target.files[0], url: window.URL.createObjectURL(e.target.files[0]) });
+            props.setPhoto({
+                file: e.target.files[0],
+                url: window.URL.createObjectURL(e.target.files[0])
+            });
         }
     }
 
@@ -33,15 +38,12 @@ function PhotoLabel(props: TPhotoLabel) {
             {
                 props.photo &&
                 <img
-                    src={props.photo.url || props.photo}
+                    src={typeof props.photo === "string" ? props.photo : (props.photo as TPhoto).url}
                     style={{ objectFit: 'cover', height: '100%', width: '100%' }}
                 />
             }
             <label htmlFor={props.id.toString()} style={{ position: 'absolute', }}>
-                <Icon
-                    icon={addIcon}
-                    style={{ width: '40px', height: '40px' }}
-                />
+                <Icon icon={addIcon} style={{ width: '40px', height: '40px' }} />
             </label>
             <input
                 id={props.id.toString()}
@@ -56,8 +58,8 @@ function PhotoLabel(props: TPhotoLabel) {
 
 type TPickPhotos = {
     title: string,
-    photo: any,
-    setPhoto: (p: any) => void
+    photo: TPhoto | string,
+    setPhoto: (p: TPhoto | string) => void
     style?: {},
     editing?: boolean,
     editClick?: () => void

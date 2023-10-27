@@ -1,23 +1,15 @@
 
-
 import './SignupPage.css'
 import Input from '../../components/Inputs/Input/Input';
-import { useRef, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { signupRequest } from '../../requests';
-import { AxiosError } from 'axios';
 import { InputIconPassword } from '../../components/Inputs/InputIconPassword/InputIconPassword';
 import { ButtonWrapper } from '../../components/Buttons/ButtonWrapper';
-
 
 import arrowRightIcon from '../../assets/Arrow_Right.svg'
 import { validateEmail, validateNames } from '../../utils';
 import { useLanguage } from '../../contexts/language';
-
-type TSignuppage = any | {
-    user: any,
-    status: string
-}
 
 type TForm = {
     email: string,
@@ -28,9 +20,9 @@ type TForm = {
     confirmPassword: string,
 }
 
-export function SignupPageForm(props: TSignuppage) {
+export default function SignupPage() {
 
-    const {language} = useLanguage();
+    const { language } = useLanguage();
 
     const navigate = useNavigate();
     const [error, setError] = useState("");
@@ -43,15 +35,6 @@ export function SignupPageForm(props: TSignuppage) {
         confirmPassword: '',
 
     });
-
-
-    function handleError(err: AxiosError) {
-        if (err.response.data && (err.response.data as any).message)
-            setError((err.response.data as any).message)
-        else
-            setError(err.response.statusText)
-
-    }
 
     async function onSignup() {
         setError("");
@@ -72,14 +55,18 @@ export function SignupPageForm(props: TSignuppage) {
             return (setError("Invalid first name"))
         if (!validateNames(form.lastName))
             return (setError("Invalid last name"))
-
-        await signupRequest(_form)
-            .then(res => {
-                if (res && res.status === 200 && res.data && res.data.token) {
-                    navigate("/profile")
-                }
-            })
-            .catch(err => handleError(err))
+        try {
+            const res = await signupRequest(_form)
+            if (res && res.status === 200 && res.data && res.data.token) {
+                navigate("/profile")
+            }
+        }
+        catch (err) {
+            if (err.response.data && (err.response.data as any).message)
+                setError((err.response.data as any).message)
+            else
+                setError(err.response.statusText)
+        }
     }
 
     return (
@@ -91,7 +78,7 @@ export function SignupPageForm(props: TSignuppage) {
             <p className='signuppage-description'>{language && language.signup.titleDesc}</p>
 
             <div className='signuppage-input-c' style={{ position: 'relative' }}>
-                {error && <p className='signuppage-error' style={{ margin: '0', top: '0', position: 'absolute', color: 'var(--red)' }}>{error}</p>}
+                {error && <p className='signuppage-error error-msg' style={{ top: '0', position: 'absolute' }}>{error}</p>}
                 <Input
                     placeholder={language && language.Email}
                     value={form.email}
@@ -104,35 +91,30 @@ export function SignupPageForm(props: TSignuppage) {
                     setValue={(v: string) => setForm((f: TForm) => ({ ...f, username: v }))}
                     maxLength={40}
                 />
-
                 <Input
                     placeholder={language && language.profile.FirstName}
                     value={form.firstName}
                     setValue={(v: string) => setForm((f: TForm) => ({ ...f, firstName: v }))}
                     maxLength={40}
                 />
-
                 <Input
                     placeholder={language && language.profile.LastName}
                     value={form.lastName}
                     setValue={(v: string) => setForm((f: TForm) => ({ ...f, lastName: v }))}
                     maxLength={40}
                 />
-
                 <InputIconPassword
                     placeholder={language && language.Password}
                     value={form.password}
                     setValue={(v: string) => setForm((f: TForm) => ({ ...f, password: v }))}
                     maxLength={40}
                 />
-
                 <InputIconPassword
                     placeholder={language && language.ConfirmPassword}
                     value={form.confirmPassword}
                     setValue={(v: string) => setForm((f: TForm) => ({ ...f, confirmPassword: v }))}
                     maxLength={40}
                 />
-
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <ButtonWrapper onClick={onSignup} >
                         <h1 className='buttonlarge-title'>{language && language.Continue}</h1>
@@ -140,21 +122,14 @@ export function SignupPageForm(props: TSignuppage) {
                     </ButtonWrapper>
                     <div style={{ display: 'flex', marginTop: '5px' }}>
                         <p className='signuppage-fpass-raw'>{language && language.haveAccount}</p>
-                        <p onClick={() => navigate("/")} className='signuppage-fpass' style={{ paddingLeft: '5px' }}>{language && language.authenticateHere}</p>
+                        <p
+                            onClick={() => navigate("/")}
+                            className='signuppage-fpass'
+                            style={{ paddingLeft: '5px' }}
+                        >{language && language.authenticateHere}</p>
                     </div>
                 </div>
             </div>
         </div>
     )
-}
-
-export default function SignupPage() {
-
-    const [confirmPage, setConfirmPage] = useState(false);
-    const confirmPageRef = useRef(null);
-
-    return (
-        <Outlet context={{ setConfirmPage, confirmPageRef }} />
-    )
-
 }

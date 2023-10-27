@@ -1,8 +1,4 @@
-
-import { useEffect, useState } from 'react';
-import { useCurrentUser } from '../../contexts/UserContext'
 import './ProfilePicture.css'
-
 
 type TProfilePicture = {
     userId: number, 

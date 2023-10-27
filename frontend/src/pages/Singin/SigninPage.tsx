@@ -19,7 +19,7 @@ export default function SigninPage() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const {language} = useLanguage();
+    const { language } = useLanguage();
 
     const [error, setError] = useState("");
     const [username, setUsername] = useState("");
@@ -66,8 +66,8 @@ export default function SigninPage() {
             </div>
             <p className='signinpage-description'>{language && language.signin.titleDesc}</p>
 
-            {error && <p style={{ color: 'var(--red)' }}>{error}</p>}
-            {message && <p style={{ color: 'var(--green)' }}>{message}</p>}
+            {error && <p className='error-msg'>{error}</p>}
+            {message && <p className='success-msg'>{message}</p>}
             <div className='signinpage-input-c' style={{ position: 'relative' }}>
                 <Input
                     placeholder={language && language.Username}
@@ -90,7 +90,6 @@ export default function SigninPage() {
                     <p onClick={() => navigate("/signin/password")} className='signinpage-fpass'>{language && language.signin.forgetPassword}</p>
                 </div>
 
-
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <div className='signinpage-diffauth'>
                         <a href={`${process.env.REACT_APP_BACK_URI}/oauth?school42=true`}>
@@ -103,7 +102,6 @@ export default function SigninPage() {
                                 icon={iconGoogle}
                             />
                         </a>
-
                     </div>
                     <ButtonLarge
                         title={language && language.signin.Signin}
@@ -112,7 +110,11 @@ export default function SigninPage() {
                     />
                     <div style={{ display: 'flex', marginTop: '5px' }}>
                         <p className='signinpage-fpass-raw'>{language && language.signin.noAccount}</p>
-                        <p onClick={() => navigate("/signup")} className='signinpage-fpass' style={{ paddingLeft: '5px' }}>{language && language.signin.registerHere}</p>
+                        <p
+                            onClick={() => navigate("/signup")}
+                            className='signinpage-fpass'
+                            style={{ paddingLeft: '5px' }}
+                        >{language && language.signin.registerHere}</p>
                     </div>
                 </div>
             </div>

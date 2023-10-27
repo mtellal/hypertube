@@ -7,13 +7,7 @@ import { useNavigate } from 'react-router';
 import { resetPasswordRequest } from '../../requests';
 import { useLanguage } from '../../contexts/language';
 
-type Tfrgtpassword = any | {
-    user: any,
-    status: string
-}
-
-
-export default function ForgotPasswordPage(props: Tfrgtpassword) {
+export default function ForgotPasswordPage() {
 
     const navigate = useNavigate();
     const { language } = useLanguage();
@@ -63,10 +57,9 @@ export default function ForgotPasswordPage(props: Tfrgtpassword) {
                 <span className='frgtpassword-title-pink'>{language && language.Password}</span>
             </div>
             <p className='frgtpassword-description'>{language && language.forgotPassword.titleDesc}</p>
-
             <div className='frgtpassword-input-c' style={{ position: 'relative' }}>
-                {error && <p style={{ margin: '0', position: 'absolute', top: '-5vh', color: 'var(--red)' }}>{error}</p>}
-                {success && <p style={{ margin: '0', position: 'absolute', top: '-5vh', color: 'var(--green)' }}>{success}</p>}
+                {error && <p className='success-msg' style={{ position: 'absolute', top: '-5vh' }}>{error}</p>}
+                {success && <p className='error-msg' style={{ position: 'absolute', top: '-5vh' }}>{success}</p>}
 
                 <Input
                     placeholder={language && language.Email}

@@ -15,12 +15,14 @@ export type Comment = {
     id: number,
     userId: number,
     imdb_code: string,
+    text: string, 
+    username: string,
     createdAt: Date
 }
 
 export type Subtitle = {
     id: number,
-    language: string,
+    langage: string,
     path?: string
 }
 

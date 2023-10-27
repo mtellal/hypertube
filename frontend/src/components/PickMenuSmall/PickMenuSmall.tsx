@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import './PickMenuSmall.css'
 
-import arrowIcon from '../../../assets/Unfold_More.svg'
+import arrowIcon from '../../assets/Unfold_More.svg'
 
 type TPickMenu = {
     title: string,
-    options: string[], 
-    value: string, 
-    setValue: (s:string) => void, 
-    style?: {}, 
+    options: string[],
+    value: string,
+    setValue: (s: string) => void,
+    style?: {},
     displayUp?: boolean
 }
 
@@ -18,23 +18,21 @@ export default function PickMenuSmall(props: TPickMenu) {
 
     const [selecting, setSelecting] = useState(false);
 
-    function select(option: string)
-    {
+    function select(option: string) {
         if (!option)
             option = "none"
         props.setValue(option);
-        setSelecting((s:boolean) => !s);
+        setSelecting((s: boolean) => !s);
     }
 
-    function style()
-    {
+    function style() {
         let s = {};
         if (selecting)
-            s = {visibility: "visible"};
+            s = { visibility: "visible" };
         else
-            s = {visibility: "hidden"};
+            s = { visibility: "hidden" };
         if (props.displayUp)
-            s = {...s, bottom: '100%', top:'initial'}
+            s = { ...s, bottom: '100%', top: 'initial' }
         return (s)
     }
 
@@ -46,13 +44,11 @@ export default function PickMenuSmall(props: TPickMenu) {
                 onClick={() => setSelecting((s: boolean) => !s)}
             >
                 <p className="pickmenusmall-options-placeholder" >{props.value || "none"}</p>
-                <img src={arrowIcon} style={{marginLeft: 'auto'}}/>
+                <img src={arrowIcon} style={{ marginLeft: 'auto' }} />
             </div>
 
-            <div
-                className="pickmenusmall-menu" 
-                style={style()}>
-                <p onClick={() => select("")}  className="pickmenusmall-options" style={{border: 'none'}} >none</p>
+            <div className="pickmenusmall-menu" style={style()} >
+                <p onClick={() => select("")} className="pickmenusmall-options" style={{ border: 'none' }} >none</p>
                 {
                     props.options.map((o: string) =>
                         <p key={o} onClick={() => select(o)} className="pickmenusmall-options">{o}</p>

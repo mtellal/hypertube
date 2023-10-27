@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import PickMenuSmall from "../../../components/Picker/PickMenuSmall/PickMenuSmall";
+import PickMenuSmall from "../../../components/PickMenuSmall/PickMenuSmall";
 import InputRangeText from "../../../components/Inputs/InputRangeText/InputRangeText";
 
 import './Filter.css'
@@ -8,8 +8,16 @@ import { useVideoContext } from "../../../contexts/VideosProvider";
 import InputSmall from "../../../components/Inputs/InputSmall/InputSmall";
 import { ButtonBorder } from "../../../components/Buttons/ButtonBorder";
 import { useOutsideComponent } from "../../../hooks/useOutsideComponent";
+import { SearchOptionsProps } from "../Search";
 
-export default function MenuFilter(props: any) {
+export type Filter = {
+    name: string,
+    genre: string,
+    gradeRange: { value1: string, value2: string },
+    productionYearRange: { value1: string, value2: string }
+}
+
+export default function MenuFilter(props: SearchOptionsProps) {
 
     const { videos, filterConfigRef, setFilterIds } = useVideoContext();
 
@@ -17,7 +25,7 @@ export default function MenuFilter(props: any) {
 
     useOutsideComponent(menuFilterRef, props.valid)
 
-    const [filters, setFilters] = useState({
+    const [filters, setFilters] = useState<Filter>({
         name: "",
         genre: "",
         gradeRange: { value1: '', value2: '' },
@@ -34,7 +42,7 @@ export default function MenuFilter(props: any) {
     }, [filterConfigRef.current, filterInitRef.current])
 
     function setName(s: string) {
-        setFilters((f: any) => {
+        setFilters((f: Filter) => {
             const up = { ...f, name: s };
             filterConfigRef.current = up;
             return (up)
@@ -42,7 +50,7 @@ export default function MenuFilter(props: any) {
     }
 
     function setGenre(s: string) {
-        setFilters((f: any) => {
+        setFilters((f: Filter) => {
             const up = { ...f, genre: s }
             filterConfigRef.current = up;
             return (up)
@@ -50,7 +58,7 @@ export default function MenuFilter(props: any) {
     }
 
     function setGradeRange1(s: string) {
-        setFilters((f: any) => {
+        setFilters((f: Filter) => {
             const up = { ...f, gradeRange: { ...f.gradeRange, value1: s } }
             filterConfigRef.current = up;
             return (up)
@@ -58,7 +66,7 @@ export default function MenuFilter(props: any) {
     }
 
     function setGradeRange2(s: string) {
-        setFilters((f: any) => {
+        setFilters((f: Filter) => {
             const up = { ...f, gradeRange: { ...f.gradeRange, value2: s } }
             filterConfigRef.current = up;
             return (up)
@@ -66,7 +74,7 @@ export default function MenuFilter(props: any) {
     }
 
     function setProductionYearRange1(s: string) {
-        setFilters((f: any) => {
+        setFilters((f: Filter) => {
             const up = { ...f, productionYearRange: { ...f.productionYearRange, value1: s } }
             filterConfigRef.current = up;
             return (up)
@@ -74,7 +82,7 @@ export default function MenuFilter(props: any) {
     }
 
     function setProductionYearRange2(s: string) {
-        setFilters((f: any) => {
+        setFilters((f: Filter) => {
             const up = { ...f, productionYearRange: { ...f.productionYearRange, value2: s } }
             filterConfigRef.current = up;
             return (up)
@@ -85,26 +93,21 @@ export default function MenuFilter(props: any) {
     useEffect(() => {
         let _filterVideosIds = videos.map((u: any) => {
             if (filters.name && filters.name !== "none") {
-
                 let index1 = -1;
                 try { index1 = u.title.toLowerCase().search(filters.name.toLowerCase()) }
                 catch (e) { }
-
                 if (index1 === -1)
                     return (u.id)
             }
 
-            if (filters.genre && filters.genre !== "none") {
-
-                if (!u.genres.includes(filters.genre))
-                    return (u.id)
+            if (filters.genre && filters.genre !== "none" &&
+                !u.genres.includes(filters.genre)) {
+                return (u.id)
             }
 
             if (filters.gradeRange.value1 && filters.gradeRange.value2) {
-
                 let v1 = parseFloat(filters.gradeRange.value1);
                 let v2 = parseFloat(filters.gradeRange.value2);
-
                 if (v1 > v2) {
                     v1 = v2;
                     v2 = parseFloat(filters.gradeRange.value1);
@@ -112,10 +115,10 @@ export default function MenuFilter(props: any) {
                 if ((parseFloat(u.rating) < v1 || parseFloat(u.rating) > v2))
                     return (u.id)
             }
+
             if (filters.productionYearRange.value1 && filters.productionYearRange.value2) {
                 let v1 = parseInt(filters.productionYearRange.value1);
                 let v2 = parseInt(filters.productionYearRange.value2);
-
                 if (v1 > v2) {
                     v1 = v2;
                     v2 = parseInt(filters.productionYearRange.value1);
@@ -125,7 +128,7 @@ export default function MenuFilter(props: any) {
             }
             return (null)
         })
-        _filterVideosIds = _filterVideosIds.filter((v: any) => v);
+        _filterVideosIds = _filterVideosIds.filter((v: number) => v);
         setFilterIds(_filterVideosIds)
     }, [filters.name, filters.genre, filters.gradeRange, filters.productionYearRange])
 

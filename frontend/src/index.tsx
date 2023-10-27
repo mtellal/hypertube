@@ -4,7 +4,7 @@ import { NotAuthenticateSpace, AuthenticateSpace, authenticateLoader } from './A
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SigninPage from './pages/Singin/SigninPage';
-import SignupPage, { SignupPageForm } from './pages/Signup/SignupPage';
+import SignupPage from './pages/Signup/SignupPage';
 import ForgotPasswordPage from './pages/ForgotPassword/ForgotPasswordPage';
 import ProfileCurrentUser from './pages/Profile/ProfileCurrentUser/ProfileCurrentUser';
 
@@ -38,13 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "signup",
-        element: <SignupPage />,
-        children: [
-          {
-            path: "",
-            element: <SignupPageForm />
-          }
-        ]
+        element: <SignupPage />
       }
     ]
   },
@@ -59,7 +53,7 @@ const router = createBrowserRouter([
         element: <ProfileCurrentUser />
       },
       {
-        path: "/profile/:id", 
+        path: "/profile/:id",
         element: <ProfileUser />
       },
       {
@@ -76,5 +70,5 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <RouterProvider router={router} />
+  <RouterProvider router={router} />
 );

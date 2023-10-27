@@ -8,10 +8,8 @@ import { useCurrentUser } from '../../contexts/UserContext';
 
 
 type TPhotoCarousel = {
-    user: any,
-    photo: any,
+    photo: string,
     onClickIcon?: () => void,
-    isCurrentUser?: boolean
 }
 
 
@@ -24,14 +22,10 @@ export default function PhotoCarousel(props: TPhotoCarousel) {
         <div className="photocarousel" >
             <div className="photocarousel-c1-c">
                 <div className="photocarousel-c1">
-                    <img
-                        src={props.photo}
-                        className="photocarousel-i2"
-                    />
+                    <img src={props.photo} className="photocarousel-i2" />
                     {
                         currentUser && (currentUser.userId === Number(id) || !id) &&
                         <div className="photocarousel-edit" onClick={() => { }} >
-
                             <RoundIconBorder
                                 icon={EditBlack}
                                 onClick={props.onClickIcon}

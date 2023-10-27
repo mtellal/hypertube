@@ -1,11 +1,11 @@
-import { createContext, useContext, useRef, useState } from "react"
+import { MutableRefObject, ReactNode, createContext, useContext, useRef, useState } from "react"
 
 
 import './ModalPage.css'
 
 type TModalContext = {
-    setShowModal: (p: boolean | ((p: boolean) => any)) => void,
-    modalRef: any
+    setShowModal: (p: boolean | ((p: boolean) => void)) => void,
+    modalRef: MutableRefObject<any>
 }
 
 export const ModalContext: React.Context<TModalContext> = createContext({
@@ -17,7 +17,11 @@ export function useModalPage() {
     return (useContext(ModalContext))
 }
 
-export function ModalPage({ children }: any) {
+type ModalPageProps = {
+    children: ReactNode
+}
+
+export function ModalPage({ children }: ModalPageProps) {
 
     const [showModal, setShowModal] = useState(false);
 

@@ -1,7 +1,6 @@
 import './MoviePresentation.css'
 
 export default function MoviePresentation({ video }: any) {
-
     return (
         <div className='searchelm-c1'>
             <div className='' style={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
