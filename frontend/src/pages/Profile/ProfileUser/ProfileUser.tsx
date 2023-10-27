@@ -50,7 +50,7 @@ export default function ProfileUser(props: any) {
 
     useEffect(() => {
         if (id) {
-            if (currentUser && parseInt(id) === parseInt(currentUser.userId))
+            if (currentUser && parseInt(id) === currentUser.userId)
                 navigate("/profile")
             if (!userLoadingRef.current)
                 loadUser();

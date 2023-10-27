@@ -12,6 +12,7 @@ import { validateEmail, validateNames } from "../../../../utils";
 import { updateUserRequest } from "../../../../requests";
 import { InfoLabel } from "../InfoLabel/InfoLabel";
 import { RoundIconBorder } from "../../../../components/Icons/RoundIconBorder";
+import { User } from "../../../../types";
 
 
 
@@ -76,7 +77,7 @@ export default function ProfileUserPref() {
     const { currentUser, setCurrentUser } = useCurrentUser()
     const [editing, setEditing] = useState(false)
 
-    const [profileUser, setProfileUser]: any = useState()
+    const [profileUser, setProfileUser] = useState<User>()
 
     const [success, setSuccess] = useState("");
     const [error, setError] = useState("");
@@ -118,10 +119,10 @@ export default function ProfileUserPref() {
             let updateDatas: any = {};
             let update: boolean = false;
             for (let k of keys) {
-                if (currentUser[k] !== profileUser[k]) {
+                if (currentUser[k as keyof User] !== profileUser[k as keyof User]) {
                     if (!update)
                         update = !update;
-                    updateDatas[k] = profileUser[k];
+                    updateDatas[k] = profileUser[k as keyof User];
                 }
             }
             if (update) {

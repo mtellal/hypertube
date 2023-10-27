@@ -32,7 +32,7 @@ app.get("/user/photo/:id", UserMiddleware.JWTAuthentification, UserController.ge
 app.post("/user/signup", UserController.signup)
 app.post("/user/signin", UserController.signin)
 app.post("/user/update", UserMiddleware.JWTAuthentification, UserController.updateUser)
-app.post("/user/resetPassword", UserMiddleware.JWTAuthentification, UserController.resetPassword)
+app.post("/user/resetPassword", UserController.resetPassword)
 app.post("/user/updatePassword", UserMiddleware.JWTAuthentification, UserController.updatePassword)
 app.post("/user/photos", UserMiddleware.JWTAuthentification, UserController.uploadProfilePicture)
 

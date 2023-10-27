@@ -28,7 +28,7 @@ function UserInfos(props: TUserInfos) {
             <ProfilePicture
                 userId={currentUser && currentUser.userId}
                 style={{ height: '50px', width: '50px' }}
-                url={currentUser && currentUser.photos}
+                url={currentUser && currentUser.photo}
                 onClick={() => navigate("/profile")}
             />
             <p className="header-c2-username">{currentUser && currentUser.firstName}</p>

@@ -13,12 +13,12 @@ type TPath = {
 
 export default function MobileHeaderMenu() {
 
-    const { language, setLanguage } = useLanguage()
+    const { language } = useLanguage()
     const navigate = useNavigate();
-    const [paths, setPaths] = useState([]);
     const location = useLocation();
-    const [picking, setPicking] = useState(false);
 
+    const [paths, setPaths]: [TPath[], any] = useState([]);
+    const [picking, setPicking] = useState(false);
     const buttonRef = useRef(null);
 
     useOutsideComponent(buttonRef, () => {
@@ -41,10 +41,13 @@ export default function MobileHeaderMenu() {
     return (
         <div className="mobileheadermenu">
             <div ref={buttonRef} className="mobileheadermenu-button">
-                <ButtonBorderMenu
-                    title={paths && paths.length > 0 && paths[0].title}
-                    style={{ backgroundColor: 'var(--purple2)' }}
-                    onClick={() => setPicking((p: boolean) => !p)} />
+                {
+                    paths && paths.length > 0 &&
+                    <ButtonBorderMenu
+                        title={paths[0].title}
+                        style={{ backgroundColor: 'var(--purple2)' }}
+                        onClick={() => setPicking((p: boolean) => !p)} />
+                }
                 {
                     picking && paths.length > 0 &&
                     <div className="mobileheader-menu">

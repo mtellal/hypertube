@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import './ProfileCurrentUser.css'
 
@@ -9,7 +9,7 @@ import PickPhotos from "../../../components/PickPhotos/PickPhotos";
 
 import ProfileUserPref from "../ProfilePage/ProfileUserPref/ProfileUserPref";
 
-import { updatePhotosRequest, updateUserRequest } from "../../../requests";
+import { updatePhotosRequest } from "../../../requests";
 import { useCurrentUser } from "../../../contexts/UserContext";
 
 export default function ProfileCurrentUser() {
@@ -26,8 +26,8 @@ export default function ProfileCurrentUser() {
     useEffect(() => {
         if (currentUser) {
             setProfileUser(currentUser)
-            if (currentUser.photos)
-                setPhoto(currentUser.photos)
+            if (currentUser.photo)
+                setPhoto(currentUser.photo)
         }
     }, [currentUser])
 
@@ -42,20 +42,20 @@ export default function ProfileCurrentUser() {
             if (photo.file.size >= 1024 * 1024 * 10) {
                 return (setError("File too long (max size 10MB"))
             }
-            setCurrentUser((u: any) => ({ ...u, photos: photo.url }))
-            updatePhotosRequest(photo.file)
-                .then(res => {
-                    if (res && res.data && res.data.message)
-                        setSuccess(res.data.message)
-                    else
-                        setError("Update user photo succeed")
-                })
-                .catch(err => {
-                    if (err && err.response && err.response.data && err.response.data.message)
-                        setError(err.response.data.message)
-                    else
-                        setError("Update user photo failed")
-                })
+            setCurrentUser((u: any) => ({ ...u, photo: photo.url }))
+            try {
+                const res = await updatePhotosRequest(photo.file)
+                if (res && res.data && res.data.message)
+                    setSuccess(res.data.message)
+                else
+                    setError("Update user photo succeed")
+            }
+            catch (err) {
+                if (err && err.response && err.response.data && err.response.data.message)
+                    setError(err.response.data.message)
+                else
+                    setError("Update user photo failed")
+            }
         }
     }, [profileUser, photo]);
 

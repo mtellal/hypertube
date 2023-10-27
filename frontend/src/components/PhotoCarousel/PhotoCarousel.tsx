@@ -29,7 +29,7 @@ export default function PhotoCarousel(props: TPhotoCarousel) {
                         className="photocarousel-i2"
                     />
                     {
-                        currentUser && (currentUser.userId === id || !id) &&
+                        currentUser && (currentUser.userId === Number(id) || !id) &&
                         <div className="photocarousel-edit" onClick={() => { }} >
 
                             <RoundIconBorder

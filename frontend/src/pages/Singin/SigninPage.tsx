@@ -27,6 +27,7 @@ export default function SigninPage() {
     const [message, setMessage] = useState("");
 
     useEffect(() => {
+        document.cookie = `access_token=; path=/`;
         if (location.state && location.state.message)
             setMessage(location.state.message);
     }, [])

@@ -1,24 +1,25 @@
-import { createContext, useContext, useEffect, useState } from "react";
-
+import { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import { User } from "../types";
 
 export type TCurrentUser = {
-    currentUser: any
-    setCurrentUser: (u: any | ((u: any) => any)) => void
-    addBlockUserId: (id: string) => void,
-    removeBlockUserId: (id: string) => void
+    currentUser: User | undefined,
+    setCurrentUser: (u: User | ((u: User) => any)) => void
 }
 
-const UserContext: React.Context<TCurrentUser> = createContext(null)
+const UserContext: React.Context<TCurrentUser | undefined> = createContext(undefined)
 
 export function useCurrentUser() {
     return (useContext(UserContext))
 }
 
-export function UserProvider({ children, _user}: any) {
+type UserContextProviderProps = {
+    children: ReactNode,
+    _user: User
+}
 
-    const [currentUser, setCurrentUser] = useState({
-        blockIds: []
-    });
+export function UserProvider({ children, _user }: UserContextProviderProps) {
+
+    const [currentUser, setCurrentUser] = useState();
 
     useEffect(() => {
         if (_user) {
@@ -26,20 +27,10 @@ export function UserProvider({ children, _user}: any) {
         }
     }, [_user])
 
-    function addBlockUserId(blockUserId: string) {
-        setCurrentUser((u: any) => ({ ...u, blockIds: u.blockIds && u.blockIds.length ? [...u.blockIds, blockUserId] : [blockUserId] }))
-    }
-
-    function removeBlockUserId(blockUserId: string) {
-        setCurrentUser((u: any) => ({ ...u, blockIds: u.blockIds.filter((id: string) => id !== blockUserId) }))
-    }
-
     return (
         <UserContext.Provider value={{
             currentUser,
-            setCurrentUser,
-            addBlockUserId,
-            removeBlockUserId
+            setCurrentUser
         }}>
             {children}
         </UserContext.Provider>

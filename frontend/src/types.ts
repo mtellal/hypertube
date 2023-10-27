@@ -1,17 +1,31 @@
-export type Tag = {
-    tagId: number, 
-    tag: string
+export type User = {
+    userId: number,
+    username: string,
+    firstName: string,
+    lastName: string,
+    photoPath: string,
+    photo: string,
+
+    moviesWatched?: string[],
+    email?: string,
+    omniauth?: boolean
 }
 
-export type Notification = {
-    id: string, 
-    firstName: string, 
-    userId: number | string, 
-    createdAt: Date | string,
+export type Comment = {
+    id: number,
+    userId: number,
+    imdb_code: string,
+    createdAt: Date
+}
 
-    user?: any,
-    convId?: string, 
-    userId1?: string,
-    userId2?: string,
-    action?: string
+export type Subtitle = {
+    id: number,
+    language: string,
+    path?: string
+}
+
+export type MovieWatched = {
+    id: number, 
+    movieHash: string,
+    imdb_code: string
 }

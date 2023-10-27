@@ -12,26 +12,26 @@ import films from './assets/films.svg'
 import './pages/Singin/SigninPage.css'
 import VideoProvider from './contexts/VideosProvider';
 import { LanguageProvier } from './contexts/language';
+import { User } from './types';
+
 
 export async function authenticateLoader({ request }: any) {
-   let user: any;
+   let user: User | undefined;
    const urlParams = new URLSearchParams(new URL(request.url).search);
    const token = urlParams.get('token');
    if (token) {
       document.cookie = `access_token=${token}; path=/`;
    }
    try {
-      await getUserRequest()
-         .then(async res => {
-            user = res.data.user;
-            // console.log(user)
-            if (user && user.userId && user.photoPath) {
-               await getUserPhotoRequest(user.userId)
-                  .then((res: any) => { user.photos = [window.URL.createObjectURL(res.data)] })
-            }
-         })
+      const resUser = await getUserRequest();
+      user = resUser.data.user;
+      if (user && user.userId && user.photoPath) {
+         const resPhoto = await getUserPhotoRequest(user.userId)
+         user.photo = window.URL.createObjectURL(resPhoto.data)
+      }
    }
    catch (e) {
+      document.cookie = `access_token=; path=/`;
       return (redirect("/signin"));
    }
    return ({ user })
@@ -61,18 +61,22 @@ export function NotAuthenticateSpace() {
    );
 }
 
+type LoaderReturnType = {
+   user?: User
+}
+
 export function AuthenticateSpace() {
 
-   const { user, token }: any = useLoaderData();
+   const { user }: LoaderReturnType = useLoaderData();
 
    return (
       <LanguageProvier>
-         <UserProvider _user={user} userId={user.userId} token={token}>
+         <UserProvider _user={user}>
             <div className="App">
                <HeaderConnected status="connected" />
                <VideoProvider>
                   <div style={{ height: '93vh', width: '100%', position: 'relative' }}>
-                     <Outlet context={{ user, salut: "dfwfw" }} />
+                     <Outlet context={{ user }} />
                   </div>
                </VideoProvider>
                <div className='footer'> Hypertube </div>

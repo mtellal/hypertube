@@ -4,11 +4,14 @@ import { createContext, useContext, useRef, useState } from "react"
 import './ModalPage.css'
 
 type TModalContext = {
-    setShowModal: (p: any) => void,
+    setShowModal: (p: boolean | ((p: boolean) => any)) => void,
     modalRef: any
 }
 
-export const ModalContext: React.Context<TModalContext> = createContext(null)
+export const ModalContext: React.Context<TModalContext> = createContext({
+    setShowModal: (p: boolean) => {},
+    modalRef: null
+})
 
 export function useModalPage() {
     return (useContext(ModalContext))
