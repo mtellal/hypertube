@@ -10,6 +10,9 @@
 - The frontend run on `http://localhost:8080`
 - The backend api run on `http://localhost:3000`
 
+! ! ! The main resource provider for this project added some protections. To verify if the project will work for you, try `https://yts.torrentbay.net/api/v2/list_movies.json`. If you are redirected to a cloudflare checking page then movies will not be displayed on search page and the projet will not work correctly! ! !
+
+
 ### Environment file
 In the `backend/.env` file set: 
 - [Outlook](https://outlook.live.com/) `MAIL_ADDRESS` and `MAIL_PASSWORD` informations
